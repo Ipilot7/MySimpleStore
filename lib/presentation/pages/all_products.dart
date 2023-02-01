@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_simple_store/config/constants/app_colors.dart';
+import 'package:my_simple_store/config/constants/app_text_styles.dart';
+import 'package:my_simple_store/presentation/widgets/custom_textfield.dart';
+import 'package:my_simple_store/presentation/widgets/product_widget.dart';
+import 'package:my_simple_store/presentation/widgets/products_title.dart';
 
 class AllProductsPage extends StatefulWidget {
   const AllProductsPage({super.key});
@@ -12,49 +17,33 @@ class _AllProductsPageState extends State<AllProductsPage> {
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
-      color: Colors.grey.withOpacity(0.1),
-      child: Column(
-        children: [
-          const TextField(),
-          Container(
-            alignment: Alignment.center,
-            margin: const EdgeInsets.all(10),
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                gradient: AppColors.products),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('Категории'),
-                Text('Артикул'),
-                Text('Размер'),
-                Text('Штук'),
-                Text('Цена'),
-              ],
+        color: Colors.grey.withOpacity(0.1),
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            SliverAppBar(
+              titleTextStyle:
+                  AppTextStyles.body16w4.copyWith(color: AppColors.white),
+              title: const CustomTextField(),
+              titleSpacing: 0,
+              backgroundColor: Colors.white,
+              pinned: true,
+              snap: false,
+              floating: true,
+              expandedHeight: 95.h,
+              bottom: const PreferredSize(
+                preferredSize: Size(0, 46),
+                child: ProductsTitlesWidget(),
+              ),
             ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            margin: const EdgeInsets.all(10),
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                SizedBox(width: 73, child: Text('Категории')),
-                SizedBox(width: 57, child: Text('Артикул')),
-                SizedBox(width: 52, child: Text('Раpмер')),
-                SizedBox(width: 36, child: Text('Штук')),
-                SizedBox(width: 36, child: Text('Цена')),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+            SliverToBoxAdapter(
+                child: Column(
+              children: List.generate(
+                50,
+                (index) => const ProductWidget(),
+              ),
+            ))
+          ],
+        ));
   }
 }

@@ -10,7 +10,6 @@ void main() => runApp(ScreenUtilInit(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
-          backgroundColor: Colors.white,
           scaffoldBackgroundColor: Colors.white,
         ),
         onGenerateRoute: (settings) => Routes.generateRoute(settings),
