@@ -224,7 +224,7 @@ class _AddProductsPageState extends State<AddProductsPage> {
                   TableCell(
                       child: ColoredBox(
                           color: Colors.grey.shade300,
-                          child: const Center(child: Text('size')))),
+                          child: const Center(child: Text('count')))),
                   TableCell(
                       child: ColoredBox(
                           color: Colors.grey.shade300,

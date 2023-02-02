@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_simple_store/config/constants/app_colors.dart';
 import 'package:my_simple_store/config/constants/app_text_styles.dart';
+import 'package:my_simple_store/presentation/routes/routes.dart';
 import 'package:my_simple_store/presentation/widgets/custom_textfield.dart';
 import 'package:my_simple_store/presentation/widgets/product_widget.dart';
 import 'package:my_simple_store/presentation/widgets/products_title.dart';
@@ -39,16 +40,32 @@ class _AllProductsPageState extends State<AllProductsPage> {
             expandedHeight: 107.h,
             bottom: PreferredSize(
               preferredSize: Size(0, 58.h),
-              child: const ProductsTitlesWidget(),
+              child: const ProductsTitlesWidget(
+                text1: 'Категории',
+                text2: 'Артикул',
+                text3: 'Штук',
+                text4: 'Цена',
+              ),
             ),
           ),
           SliverToBoxAdapter(
-              child: Column(
-            children: List.generate(
-              20,
-              (index) => const ProductWidget(),
+            child: Column(
+              children: List.generate(
+                20,
+                (index) => GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.viewProductPage);
+                  },
+                  child: const ProductWidget(
+                    text1: 'Брюки',
+                    text2: 'ФК-5432',
+                    text3: '20',
+                    text4: '15000',
+                  ),
+                ),
+              ),
             ),
-          ))
+          )
         ],
       ),
     );

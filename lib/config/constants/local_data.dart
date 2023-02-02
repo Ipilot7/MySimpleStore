@@ -12,3 +12,4 @@ String selectedCategory='Выберите категорию';
     '0',
     '0'
   ];
+  

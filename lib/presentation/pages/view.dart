@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_simple_store/config/constants/app_text_styles.dart';
 import 'package:my_simple_store/config/constants/assets.dart';
 import 'package:my_simple_store/config/constants/constants.dart';
@@ -67,25 +69,77 @@ class _ViewPageState extends State<ViewPage>
               width: 200,
               padding: const EdgeInsets.all(8),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  DrawerHeader(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircleAvatar(
-                          radius: 50,
-                          child: Image.asset(Assets.images.defAvatar),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          'Baxtiyor',
-                          style: AppTextStyles.body20w5,
-                        ),
-                      ],
+                  Center(
+                    child: DrawerHeader(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircleAvatar(
+                            radius: 50,
+                            child: Image.asset(Assets.images.defAvatar),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'User ID',
+                            style: AppTextStyles.body20w5,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Column(
-                    children: const [Text('Info')],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Info'),
+                      const Text('data'),
+                      const Text('data'),
+                      SizedBox(height: 300.h),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: ElevatedButton(
+                            style: const ButtonStyle(
+                                backgroundColor:
+                                    MaterialStatePropertyAll(Colors.red)),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  scrollable: true,
+                                  title: const Text(
+                                    'Хотите выйти из программы',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  contentTextStyle: AppTextStyles.body18w5,
+                                  content: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          exit(0);
+                                        },
+                                        child: const Text('Да'),
+                                      ),
+                                      ElevatedButton(
+                                        style: const ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStatePropertyAll(
+                                                    Colors.red)),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('Нет'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: const Text('Выход')),
+                      ),
+                    ],
                   )
                 ],
               ),
