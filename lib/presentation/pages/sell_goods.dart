@@ -12,8 +12,8 @@ class SellGoodsPage extends StatefulWidget {
 class _SellGoodsPageState extends State<SellGoodsPage> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Sell Goods Page'),
+    return Column(
+      children: const [Text('data')],
     );
   }
 }

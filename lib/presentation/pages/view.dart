@@ -104,6 +104,7 @@ class _ViewPageState extends State<ViewPage>
                       ..rotateY((pi / 6) * val),
                     child: Scaffold(
                       appBar: AppBar(
+                        centerTitle: true,
                         elevation: 0,
                         title: Text(
                           menuNames[_selectedPage],

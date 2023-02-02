@@ -14,36 +14,43 @@ class AllProductsPage extends StatefulWidget {
 }
 
 class _AllProductsPageState extends State<AllProductsPage> {
+  TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
-        color: Colors.grey.withOpacity(0.1),
-        child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            SliverAppBar(
-              titleTextStyle:
-                  AppTextStyles.body16w4.copyWith(color: AppColors.white),
-              title: const CustomTextField(),
-              titleSpacing: 0,
-              backgroundColor: Colors.white,
-              pinned: true,
-              snap: false,
-              floating: true,
-              expandedHeight: 95.h,
-              bottom: const PreferredSize(
-                preferredSize: Size(0, 46),
-                child: ProductsTitlesWidget(),
-              ),
+      color: Colors.grey.withOpacity(0.1),
+      child: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          SliverAppBar(
+            titleTextStyle:
+                AppTextStyles.body16w4.copyWith(color: AppColors.white),
+            title: CustomTextField(
+              controller: controller,
+              hintText: 'Введите артикул',
+              icon: const Icon(Icons.search),
             ),
-            SliverToBoxAdapter(
-                child: Column(
-              children: List.generate(
-                50,
-                (index) => const ProductWidget(),
-              ),
-            ))
-          ],
-        ));
+            titleSpacing: 0,
+            backgroundColor: Colors.white,
+            pinned: true,
+            snap: false,
+            floating: true,
+            expandedHeight: 107.h,
+            bottom: PreferredSize(
+              preferredSize: Size(0, 58.h),
+              child: const ProductsTitlesWidget(),
+            ),
+          ),
+          SliverToBoxAdapter(
+              child: Column(
+            children: List.generate(
+              20,
+              (index) => const ProductWidget(),
+            ),
+          ))
+        ],
+      ),
+    );
   }
 }
