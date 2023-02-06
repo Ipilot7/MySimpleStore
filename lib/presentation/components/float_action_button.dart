@@ -1,4 +1,3 @@
-
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:my_simple_store/config/constants/constants.dart';
@@ -9,7 +8,9 @@ class FloatActionButton extends StatelessWidget {
     Key? key,
     required AnimationController? animationController,
     required Animation<double>? animation,
-  }) : _animationController = animationController, _animation = animation, super(key: key);
+  })  : _animationController = animationController,
+        _animation = animation,
+        super(key: key);
 
   final AnimationController? _animationController;
   final Animation<double>? _animation;
@@ -28,10 +29,10 @@ class FloatActionButton extends StatelessWidget {
           onPress: () {
             switch (index) {
               case 0:
-                Navigator.pushNamed(context, Routes.addCategory);
+                Navigator.pushNamed(context, Routes.incomePage);
                 break;
               case 1:
-                Navigator.pushNamed(context, Routes.addProductsPage);
+                Navigator.pushNamed(context, Routes.expenditurePage);
                 break;
             }
             _animationController!.reverse();

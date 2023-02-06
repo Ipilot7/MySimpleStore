@@ -3,8 +3,16 @@ import 'package:flutter/material.dart';
 abstract class AppColors {
   const AppColors._();
 
-  static const Color white = Color(0xffffffff);
-  static const Color black = Color(0xff000000);
+static Color nightBgClr = const Color(0xFF17171C);
+static Color lightBgClr = const Color(0xFFF1F2F3);
+static Color actionsClmnnClr = const Color(0xFF4B5EFC);
+static Color actionsRowColor = const Color(0xFFD2D3DA);
+static Color numbersClr = const Color(0xFF2E2F38);
+static Color lastAction = const Color(0xFF4E505F);
+static Color black = const Color(0xff000000);
+static Color white = const Color(0xffffffff);
+static Color buttons3night = const Color(0xFF4E505F);
+static Color buttons3day = const Color(0xFFD2D3DA);
 
   static LinearGradient products = LinearGradient(
       begin: const Alignment(1, 2),

@@ -21,12 +21,7 @@ class SoldProducts extends StatelessWidget {
           const SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text('Product Name'),
-              Text('Article'),
-              Text('Price'),
-              Text('14:30')
-            ],
+            children: const [Text('Тип расхода'), Text('12500'), Text('14:30')],
           )
         ],
       ),

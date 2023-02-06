@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:my_simple_store/presentation/pages/add_category.dart';
-import 'package:my_simple_store/presentation/pages/add_product.dart';
+import 'package:my_simple_store/presentation/pages/expenditure.dart';
+import 'package:my_simple_store/presentation/pages/income.dart';
 import 'package:my_simple_store/presentation/pages/view.dart';
-import 'package:my_simple_store/presentation/pages/view_product.dart';
 
 class Routes {
   static const viewPage = '/viewPage';
-  static const addProductsPage = '/addProductsPage';
-  static const addCategory = '/addCategory';
+  static const expenditurePage = '/expenditurePage';
+  static const incomePage = '/incomePage';
   static const viewProductPage = '/viewProductPage';
 
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -21,20 +20,15 @@ class Routes {
             settings: routeSettings,
             builder: (_) => const ViewPage(),
           );
-        case addProductsPage:
+        case incomePage:
           return MaterialPageRoute(
             settings: routeSettings,
-            builder: (_) => const AddProductsPage(),
+            builder: (_) => const IncomePage(),
           );
-        case addCategory:
+        case expenditurePage:
           return MaterialPageRoute(
             settings: routeSettings,
-            builder: (_) => const AddCategoryPage(),
-          );
-        case viewProductPage:
-          return MaterialPageRoute(
-            settings: routeSettings,
-            builder: (_) => const ViewProductPage(),
+            builder: (_) => const ExpenditurePage(),
           );
 
         default:

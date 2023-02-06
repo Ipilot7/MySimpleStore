@@ -53,6 +53,7 @@ class _ViewPageState extends State<ViewPage>
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
         children: [

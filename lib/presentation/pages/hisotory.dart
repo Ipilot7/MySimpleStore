@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:my_simple_store/presentation/widgets/history_widget.dart';
 
-class HistorySellsPage extends StatefulWidget {
-  const HistorySellsPage({super.key});
+class HistoryPage extends StatefulWidget {
+  const HistoryPage({super.key});
 
   @override
-  State<HistorySellsPage> createState() => _HistorySellsPageState();
+  State<HistoryPage> createState() => _HistoryPageState();
 }
 
-class _HistorySellsPageState extends State<HistorySellsPage> {
+class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     return ColoredBox(

@@ -31,7 +31,7 @@ class HistoryWidget extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10), color: Colors.white),
           child: Column(
-              children: const [SoldProducts(), SoldProducts(), SoldProducts()]),
+              children: const [SoldProducts(), ]),
         )
       ],
     );
