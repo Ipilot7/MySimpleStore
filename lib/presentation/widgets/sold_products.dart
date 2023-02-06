@@ -1,28 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_simple_store/config/constants/app_colors.dart';
+import 'package:my_simple_store/config/constants/app_text_styles.dart';
 
 class SoldProducts extends StatelessWidget {
   const SoldProducts({
     Key? key,
+    required this.type,
+    required this.desc,
+    required this.time,
+    required this.price,
+    required this.isIncoming,
   }) : super(key: key);
-
+  final String type;
+  final String desc;
+  final String time;
+  final String price;
+  final bool isIncoming;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.only(top: 10),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: 40,
-            height: 40,
-            decoration:
-                const BoxDecoration(color: Colors.blue, shape: BoxShape.circle),
+            width: 10.w,
+            height: 10.h,
+            decoration: BoxDecoration(
+              color: isIncoming ? AppColors.actionsClmnnClr : AppColors.red,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                    color:
+                        isIncoming ? AppColors.actionsClmnnClr : AppColors.red,
+                    blurRadius: 5)
+              ],
+            ),
           ),
           const SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [Text('Тип расхода'), Text('12500'), Text('14:30')],
-          )
+            children: [
+              Text(
+                type,
+                style: AppTextStyles.body16w5,
+              ),
+              SizedBox(height: 5.h),
+              Text(
+                desc,
+                style: AppTextStyles.body14w4
+                    .copyWith(color: AppColors.lastAction),
+              ),
+              SizedBox(height: 5.h),
+              Text(time, style: AppTextStyles.body11w4),
+            ],
+          ),
+          const Spacer(),
+          Text(
+            price,
+            style: AppTextStyles.body16w5.copyWith(
+              color: isIncoming ? AppColors.actionsClmnnClr : AppColors.red,
+            ),
+          ),
         ],
       ),
     );

@@ -29,10 +29,12 @@ class FloatActionButton extends StatelessWidget {
           onPress: () {
             switch (index) {
               case 0:
-                Navigator.pushNamed(context, Routes.incomePage);
+                Navigator.pushNamed(context, Routes.incomePage,
+                    arguments: {'isTrue': true});
                 break;
               case 1:
-                Navigator.pushNamed(context, Routes.expenditurePage);
+                Navigator.pushNamed(context, Routes.incomePage,
+                    arguments: {'isTrue': false});
                 break;
             }
             _animationController!.reverse();

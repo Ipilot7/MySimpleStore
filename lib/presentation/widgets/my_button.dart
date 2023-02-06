@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyButton extends StatelessWidget {
   final color;
@@ -7,16 +8,20 @@ class MyButton extends StatelessWidget {
   final buttontapped;
 
   const MyButton(
-      {this.color, this.textColor, this.buttonText, this.buttontapped});
+      {super.key,
+      this.color,
+      this.textColor,
+      this.buttonText,
+      this.buttontapped});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: buttontapped,
       child: Padding(
-        padding: const EdgeInsets.all(5),
+        padding: EdgeInsets.all(5.r),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(24.r),
           child: Container(
             color: color,
             child: Center(
@@ -24,7 +29,7 @@ class MyButton extends StatelessWidget {
                 buttonText,
                 style: TextStyle(
                   color: textColor,
-                  fontSize: 25,
+                  fontSize: 25.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
