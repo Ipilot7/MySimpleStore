@@ -1,12 +1,10 @@
 import 'dart:io';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_simple_store/config/constants/app_text_styles.dart';
 import 'package:my_simple_store/config/constants/assets.dart';
-import 'package:my_simple_store/config/constants/constants.dart';
-import 'package:my_simple_store/presentation/components/float_action_button.dart';
+import 'package:my_simple_store/presentation/pages/home.dart';
 
 class ViewPage extends StatefulWidget {
   const ViewPage({super.key});
@@ -15,45 +13,11 @@ class ViewPage extends StatefulWidget {
   State<ViewPage> createState() => _ViewPageState();
 }
 
-class _ViewPageState extends State<ViewPage>
-    with SingleTickerProviderStateMixin {
-  Animation<double>? _animation;
-  AnimationController? _animationController;
-
-  PageController controller = PageController();
-
-  int _selectedPage = 0;
-
-  List<bool> indexes = [true, false, false, false];
-
-  void select(int index) {
-    indexes.clear();
-    indexes = List.generate(4, (i) => i == index);
-    setState(() {
-      _selectedPage = index;
-    });
-    controller.jumpToPage(_selectedPage);
-  }
-
-  @override
-  void initState() {
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 260),
-    );
-
-    final curvedAnimation =
-        CurvedAnimation(curve: Curves.easeInOut, parent: _animationController!);
-    _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
-
-    super.initState();
-  }
-
+class _ViewPageState extends State<ViewPage> {
   double value = 0;
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
         children: [
@@ -104,39 +68,7 @@ class _ViewPageState extends State<ViewPage>
                                 backgroundColor:
                                     MaterialStatePropertyAll(Colors.red)),
                             onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  scrollable: true,
-                                  title: const Text(
-                                    'Хотите выйти из программы',
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  contentTextStyle: AppTextStyles.body18w5,
-                                  content: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          exit(0);
-                                        },
-                                        child: const Text('Да'),
-                                      ),
-                                      ElevatedButton(
-                                        style: const ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStatePropertyAll(
-                                                    Colors.red)),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Text('Нет'),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
+                              _exitAppShowDialog(context);
                             },
                             child: const Text('Выход')),
                       ),
@@ -157,42 +89,7 @@ class _ViewPageState extends State<ViewPage>
                       ..setEntry(3, 2, 0.001)
                       ..setEntry(0, 3, 200 * val)
                       ..rotateY((pi / 6) * val),
-                    child: Scaffold(
-                      appBar: AppBar(
-                        centerTitle: true,
-                        elevation: 0,
-                        title: Text(
-                          menuNames[_selectedPage],
-                        ),
-                      ),
-                      body: PageView(
-                        scrollDirection: Axis.horizontal,
-                        physics: const NeverScrollableScrollPhysics(),
-                        reverse: true,
-                        controller: controller,
-                        children: getPages(),
-                      ),
-                      floatingActionButton: _selectedPage == 0
-                          ? FloatActionButton(
-                              animationController: _animationController,
-                              animation: _animation)
-                          : null,
-                      bottomNavigationBar: BottomNavigationBar(
-                        currentIndex: _selectedPage,
-                        onTap: (index) {
-                          select(index);
-                        },
-                        selectedItemColor: Colors.blue,
-                        unselectedItemColor: Colors.black,
-                        items: List.generate(
-                          menuIcons.length,
-                          (index) => BottomNavigationBarItem(
-                            icon: menuIcons[index],
-                            label: menuNames[index],
-                          ),
-                        ),
-                      ),
-                    ));
+                    child: const HomePage());
               }),
           GestureDetector(
             onHorizontalDragUpdate: (e) {
@@ -208,6 +105,39 @@ class _ViewPageState extends State<ViewPage>
             },
           )
         ],
+      ),
+    );
+  }
+
+  Future<dynamic> _exitAppShowDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        scrollable: true,
+        title: const Text(
+          'Хотите выйти из программы',
+          textAlign: TextAlign.center,
+        ),
+        contentTextStyle: AppTextStyles.body18w5,
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                exit(0);
+              },
+              child: const Text('Да'),
+            ),
+            ElevatedButton(
+              style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(Colors.red)),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Нет'),
+            ),
+          ],
+        ),
       ),
     );
   }

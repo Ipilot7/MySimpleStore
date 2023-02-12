@@ -24,7 +24,6 @@ class _IncomePageState extends State<IncomePage> {
   String text = '';
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.lightBgClr,
@@ -41,7 +40,7 @@ class _IncomePageState extends State<IncomePage> {
               child: TextField(
                 autocorrect: true,
                 controller: descInput,
-                inputFormatters: [LengthLimitingTextInputFormatter(9)],
+                // inputFormatters: [LengthLimitingTextInputFormatter(9)],
                 maxLines: 4,
                 decoration: const InputDecoration.collapsed(
                     hintText: 'Добавить заметку'),
@@ -87,19 +86,18 @@ class _IncomePageState extends State<IncomePage> {
           ElevatedButton(
             onPressed: () {
               IncomeExpensesModel model = IncomeExpensesModel();
-
               model.desc = descInput.text;
               model.isincome = widget.isTrue;
               model.price = double.parse(price.text);
               model.type = "Корни";
               model.dataTime = DateTime.now();
-
               hello.add(model);
 
               print(hello);
               price.clear();
               descInput.clear();
               Navigator.pop(context);
+              setState(() {});
             },
             child: const Text('add Item'),
           ),

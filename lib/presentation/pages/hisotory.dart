@@ -1,30 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:my_simple_store/config/constants/local_data.dart';
 import 'package:my_simple_store/presentation/widgets/history_widget.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-class HistoryPage extends StatefulWidget {
-  const HistoryPage({super.key});
+class HistorPage extends StatelessWidget {
+  const HistorPage(
+      {super.key, required this.controller, required this.panelController});
+  final ScrollController controller;
+  final PanelController panelController;
 
-  @override
-  State<HistoryPage> createState() => _HistoryPageState();
-}
-
-class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
-    return hello.isEmpty
-        ? ColoredBox(
-            color: Colors.grey.withOpacity(0.2),
-            child: const Center(
-              child: Text('История пуста'),
-            ))
-        : ColoredBox(
-            color: Colors.grey.withOpacity(0.2),
-            child: ListView(
-              children: const [
-                HistoryWidget(),
-              ],
+    var size = MediaQuery.of(context).size;
+    return ListView(
+      shrinkWrap: true,
+      controller: controller,
+      padding: EdgeInsets.zero,
+      children: [
+        Center(
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            width: size.width * 0.5,
+            alignment: Alignment.center,
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            decoration: BoxDecoration(
+              color: Colors.amber,
+              borderRadius: BorderRadius.circular(10),
             ),
-          );
+            child: const Text('Баланс: 350000000000'),
+          ),
+        ),
+        const HistoryWidget(),
+      ],
+    );
   }
 }

@@ -35,20 +35,17 @@ class HistoryWidget extends StatelessWidget {
           padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10), color: Colors.white),
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: hello.length,
-            itemBuilder: (_, index) {
-              print(hello[index].dataTime);
-
-              return SoldProducts(
+          child: Column(
+            children: List.generate(
+              hello.length,
+              (index) => SoldProducts(
                 desc: hello[index].desc!,
                 isIncoming: hello[index].isincome!,
                 price: hello[index].price!.toString(),
                 time: hello[index].dataTime!.toString(),
                 type: hello[index].type!,
-              );
-            },
+              ),
+            ),
           ),
         ),
       ],

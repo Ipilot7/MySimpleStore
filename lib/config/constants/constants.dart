@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
-import 'package:my_simple_store/presentation/pages/hisotory.dart';
-import 'package:my_simple_store/presentation/pages/home.dart';
 
 List<String> menuNames = ['Главная', 'История'];
 List<Icon> menuIcons = [
@@ -13,14 +11,6 @@ List floatListIcons = [
   Icons.add_circle_outline_sharp,
   Icons.remove_circle_outline_outlined
 ];
-
-getPages() {
-  final List<Widget> pages = [
-    const HomePage(),
-    const HistoryPage(),
-  ];
-  return pages;
-}
 
 TextStyle kTextstyle(
     {Color? color,
