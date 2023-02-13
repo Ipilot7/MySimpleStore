@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:my_simple_store/config/constants/app_colors.dart';
 import 'package:my_simple_store/config/constants/app_text_styles.dart';
-import 'package:my_simple_store/config/constants/local_data.dart';
+import 'package:my_simple_store/data/models/income_expenses_model.dart';
 import 'package:my_simple_store/presentation/widgets/sold_products.dart';
 
 class HistoryWidget extends StatelessWidget {
   const HistoryWidget({
     Key? key,
+    required this.dataList,
   }) : super(key: key);
+  final List<IncomeExpensesModel> dataList;
 
   @override
   Widget build(BuildContext context) {
@@ -37,18 +39,24 @@ class HistoryWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(10), color: Colors.white),
           child: Column(
             children: List.generate(
-              hello.length,
+              dataList.length,
               (index) => SoldProducts(
-                desc: hello[index].desc!,
-                isIncoming: hello[index].isincome!,
-                price: hello[index].price!.toString(),
-                time: hello[index].dataTime!.toString(),
-                type: hello[index].type!,
+                desc: dataList[index].desc!.toString(),
+                isIncoming: dataList[index].isincome == 1,
+                price: dataList[index].price!.toString(),
+                time: dataList[index].datatime!.toString(),
+                type: '55',
               ),
             ),
           ),
         ),
       ],
     );
+  }
+
+  String truncateWithEllipsis(int cutoff, String myString) {
+    return (myString.length <= cutoff)
+        ? myString
+        : '${myString.substring(0, cutoff)}...';
   }
 }

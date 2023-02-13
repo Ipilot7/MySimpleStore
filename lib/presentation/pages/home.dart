@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:my_simple_store/config/constants/app_colors.dart';
+import 'package:my_simple_store/config/constants/app_text_styles.dart';
+import 'package:my_simple_store/data/data_providers/db_handler.dart';
+import 'package:my_simple_store/data/models/income_expenses_model.dart';
 import 'package:my_simple_store/presentation/components/float_action_button.dart';
 import 'package:my_simple_store/presentation/pages/hisotory.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -11,6 +18,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+  DBHelper? dbHelper;
+  late Future<List<IncomeExpensesModel>> dataList;
+
+  static double fabHeightClosed = 116.h;
+  double fabHeight = fabHeightClosed;
+
   PanelController panelController = PanelController();
   ScrollController scrollcontroler = ScrollController();
   Animation<double>? _animation;
@@ -28,6 +41,13 @@ class _HomePageState extends State<HomePage>
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
 
     super.initState();
+
+    dbHelper = DBHelper();
+    loadData();
+  }
+
+  loadData() {
+    dataList = dbHelper!.getDataList();
   }
 
   @override
@@ -38,25 +58,43 @@ class _HomePageState extends State<HomePage>
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
-        title: const Text(
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: () {
+            ZoomDrawer.of(context)!.toggle();
+          },
+        ),
+        title: Text(
           'Home',
+          style: AppTextStyles.body37w5.copyWith(color: AppColors.white),
         ),
       ),
       body: SlidingUpPanel(
-          maxHeight: panelHeightOpen,
-          minHeight: panelHeightClosed,
-          color: Colors.white,
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(18), topRight: Radius.circular(18)),
-          parallaxEnabled: true,
-          parallaxOffset: .5,
-          body: const Text('home'),
-          panelBuilder: (sc) => HistorPage(
-                controller: scrollcontroler,
-                panelController: panelController,
-              )),
-      floatingActionButton: FloatActionButton(
-          animationController: _animationController, animation: _animation),
+        controller: panelController,
+        backdropTapClosesPanel: false,
+        // isDraggable: false,
+        maxHeight: panelHeightOpen,
+        minHeight: panelHeightClosed,
+        color: AppColors.lightBgClr,
+        borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(18), topRight: Radius.circular(18)),
+        parallaxEnabled: true,
+        parallaxOffset: .5,
+        body: const Text('home'),
+        panelBuilder: (scrollcontroler) => HistoryPage(
+          controller: scrollcontroler,
+          panelController: panelController,
+        ),
+        onPanelSlide: (position) => setState(() {
+          final panelMaxScrolExtent = panelHeightOpen - panelHeightClosed;
+          fabHeight = position * panelMaxScrolExtent + fabHeightClosed;
+        }),
+      ),
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: fabHeight.h),
+        child: FloatActionButton(
+            animationController: _animationController, animation: _animation),
+      ),
     );
   }
 

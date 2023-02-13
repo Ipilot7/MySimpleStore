@@ -6,7 +6,7 @@ import 'app_colors.dart';
 abstract class AppTextStyles {
   const AppTextStyles._();
 
-  static const String fontFamily = 'Montserrat';
+  static const String fontFamily = 'DancingScript';
 
   static TextStyle head29w7 = TextStyle(
       fontFamily: fontFamily,
@@ -165,6 +165,7 @@ abstract class AppTextStyles {
       fontStyle: FontStyle.normal,
       fontSize: 10.sp,
       color: AppColors.black);
+
   static TextStyle body37w5 = TextStyle(
       fontFamily: fontFamily,
       fontWeight: FontWeight.w500,
@@ -335,7 +336,7 @@ abstract class AppTextStyles {
       fontSize: 20.sp,
       color: AppColors.black);
 
-  static TextStyle body20w5 =  TextStyle(
+  static TextStyle body20w5 = TextStyle(
       fontFamily: fontFamily,
       fontWeight: FontWeight.w500,
       fontStyle: FontStyle.normal,

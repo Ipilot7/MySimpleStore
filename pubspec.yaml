@@ -20,6 +20,7 @@ dependencies:
   sqflite: ^2.2.4+1
   path_provider: ^2.0.12
   sliding_up_panel: ^2.0.0+1
+  flutter_zoom_drawer: ^3.0.3
 
 dev_dependencies:
   flutter_test:
@@ -42,13 +43,10 @@ flutter:
 
   
   # fonts:
-  #   - family: Schyler
+  #   - family: DancingScript
   #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  #       - asset: fonts/Dancing/DancingScript-Bold.ttf
+  #       - asset: fonts/Dancing/DancingScript-Medium.ttf
+  #       - asset: fonts/Dancing/DancingScript-Regular.ttf
+  #       - asset: fonts/Dancing/DancingScript-SemiBold.ttf
+     

@@ -4,7 +4,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'dart:io' as io;
 
-
 class DBHelper {
   static Database? _db;
   Future<Database?> get db async {
@@ -24,33 +23,32 @@ class DBHelper {
 
   _createFatabase(Database db, int version) async {
     await db.execute(
-        "CREATE TABLE myDayly(id INTEGER PRIMARY KEY AUTOINKREMENT, type TEXT NOT NULL , desc TEXT NOT NULL, price REAL NOT NULL, datatime TEXT NOT NULL, isincome INTEGER NOT NULL, price INTEGER NOT NULL)");
+        "CREATE TABLE mydb(id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT NOT NULL , desc TEXT NOT NULL, price REAL NOT NULL, datatime TEXT NOT NULL, isincome INTEGER NOT NULL)");
   }
 
 //inserting data
   Future<IncomeExpensesModel> insert(
       IncomeExpensesModel incomeExpensesModel) async {
     var dbClient = await db;
-    await dbClient?.insert('myDayly', incomeExpensesModel.toJson());
+    await dbClient?.insert('mydb', incomeExpensesModel.toMap());
     return incomeExpensesModel;
   }
 
-  Future<List<IncomeExpensesModel Function(Map<String, dynamic> json)>>
-      getDataList() async {
+  Future<List<IncomeExpensesModel>> getDataList() async {
     await db;
-    final List<Map<String, Object?>> queryResult =
-        await _db!.rawQuery('SELECT * FROM myDayly');
-    return queryResult.map((e) => IncomeExpensesModel.fromJson).toList();
+    final List<Map<String, dynamic>> queryResult =
+        await _db!.rawQuery('SELECT * FROM mydb');
+    return queryResult.map((e) => IncomeExpensesModel.fromMap(e)).toList();
   }
 
   Future<int> delete(int id) async {
     var dbClient = await db;
-    return await dbClient!.delete('myDauly', where: 'id = ?', whereArgs: [id]);
+    return await dbClient!.delete('mydb', where: 'id = ?', whereArgs: [id]);
   }
 
   Future<int> update(IncomeExpensesModel incomeExpensesModel) async {
     var dbClient = await db;
-    return await dbClient!.update('myDayly', incomeExpensesModel.toJson(),
+    return await dbClient!.update('mydb', incomeExpensesModel.toMap(),
         where: 'id = ?', whereArgs: [incomeExpensesModel.id]);
   }
 }

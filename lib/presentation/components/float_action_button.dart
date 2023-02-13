@@ -1,5 +1,7 @@
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
+import 'package:my_simple_store/config/constants/app_colors.dart';
+import 'package:my_simple_store/config/constants/app_text_styles.dart';
 import 'package:my_simple_store/config/constants/constants.dart';
 import 'package:my_simple_store/presentation/routes/routes.dart';
 
@@ -23,9 +25,9 @@ class FloatActionButton extends StatelessWidget {
         (index) => Bubble(
           title: floatListNames[index],
           iconColor: Colors.white,
-          bubbleColor: Colors.blue,
+          bubbleColor: Colors.indigo,
           icon: floatListIcons[index],
-          titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
+          titleStyle: AppTextStyles.body16w5.copyWith(color: AppColors.white),
           onPress: () {
             switch (index) {
               case 0:
@@ -47,7 +49,7 @@ class FloatActionButton extends StatelessWidget {
           : _animationController!.forward(),
       iconColor: Colors.white,
       iconData: Icons.add,
-      backGroundColor: Colors.blue,
+      backGroundColor: Colors.indigo,
     );
   }
 }
