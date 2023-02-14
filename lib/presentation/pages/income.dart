@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:my_simple_store/config/constants/app_colors.dart';
 import 'package:my_simple_store/config/constants/app_text_styles.dart';
 import 'package:my_simple_store/config/constants/constants.dart';
@@ -129,24 +130,23 @@ class _IncomePageState extends State<IncomePage> {
                 ElevatedButton(
                   onPressed: () {
                     if (_fromKey.currentState!.validate()) {
-                      var date = DateTime.now();
+                      var now = DateTime.now();
+                      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+
+                      final String date = formatter.format(now);
+
                       dbHelper!.insert(IncomeExpensesModel(
                           type: 'hello',
                           desc: descInput.text,
                           price: double.parse(price.text),
-                          datatime: date.toString(),
+                          datatime: monthReturned(date),
                           isincome: widget.isTrue == true ? 1 : 0));
+                      // print(date);
+                      // monthReturned(date);
                       Navigator.pop(context);
                       price.clear();
                       descInput.clear();
                     }
-                    // IncomeExpensesModel model = IncomeExpensesModel();
-                    // model.desc = descInput.text;
-                    // model.isincome = widget.isTrue;
-                    // model.price = double.parse(price.text);
-                    // model.type = "Корни";
-                    // model.dataTime = DateTime.now();
-                    // hello.add(model);
                   },
                   child: const Text('add Item'),
                 ),
@@ -199,6 +199,63 @@ class _IncomePageState extends State<IncomePage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  String monthReturned(String date) {
+    var day = int.parse(date.substring(8, 10));
+    var month = int.parse(date.substring(5, 7));
+    String monthName = '';
+
+    switch (month) {
+      case 1:
+        monthName = 'Январь';
+        break;
+      case 2:
+        monthName = 'Февраль';
+        break;
+      case 3:
+        monthName = 'Март';
+        break;
+      case 4:
+        monthName = 'Апрель';
+        break;
+      case 5:
+        monthName = 'Май';
+        break;
+      case 6:
+        monthName = 'Июнь';
+        break;
+      case 7:
+        monthName = 'Июль';
+        break;
+      case 8:
+        monthName = 'Август';
+        break;
+      case 9:
+        monthName = 'Сентябрь';
+        break;
+      case 10:
+        monthName = 'Октябрь';
+        break;
+      case 11:
+        monthName = 'Ноябрь';
+        break;
+      case 12:
+        monthName = 'Декабрь';
+        break;
+      default:
+        monthName = 'Нет такого месяца';
+    }
+    return '$day $monthName';
+  }
+
+  _showMessage(String text, {bool isError = true}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: isError ? Colors.red : Colors.green[400],
+        content: Text(text, style: AppTextStyles.body15w5),
       ),
     );
   }

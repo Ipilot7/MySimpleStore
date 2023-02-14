@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:my_simple_store/config/constants/app_colors.dart';
 import 'package:my_simple_store/config/constants/app_text_styles.dart';
-import 'package:my_simple_store/data/data_providers/db_handler.dart';
-import 'package:my_simple_store/data/models/income_expenses_model.dart';
 import 'package:my_simple_store/presentation/components/float_action_button.dart';
 import 'package:my_simple_store/presentation/pages/hisotory.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -18,9 +16,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  DBHelper? dbHelper;
-  late Future<List<IncomeExpensesModel>> dataList;
-
   static double fabHeightClosed = 116.h;
   double fabHeight = fabHeightClosed;
 
@@ -41,13 +36,6 @@ class _HomePageState extends State<HomePage>
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
 
     super.initState();
-
-    dbHelper = DBHelper();
-    loadData();
-  }
-
-  loadData() {
-    dataList = dbHelper!.getDataList();
   }
 
   @override
@@ -72,7 +60,6 @@ class _HomePageState extends State<HomePage>
       body: SlidingUpPanel(
         controller: panelController,
         backdropTapClosesPanel: false,
-        // isDraggable: false,
         maxHeight: panelHeightOpen,
         minHeight: panelHeightClosed,
         color: AppColors.lightBgClr,
@@ -90,23 +77,14 @@ class _HomePageState extends State<HomePage>
           fabHeight = position * panelMaxScrolExtent + fabHeightClosed;
         }),
       ),
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: fabHeight.h),
-        child: FloatActionButton(
-            animationController: _animationController, animation: _animation),
-      ),
+      floatingActionButton: fabHeight <= 116.h
+          ? Padding(
+              padding: EdgeInsets.only(bottom: fabHeight.h),
+              child: FloatActionButton(
+                  animationController: _animationController,
+                  animation: _animation),
+            )
+          : null,
     );
   }
-
-  // _showMessage(String text, {bool isError = true}) {
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     SnackBar(
-  //       backgroundColor: isError ? Colors.red : Colors.green[400],
-  //       content: Text(
-  //         text,
-  //         // style: kTextStyle(size: 15, fontWeight: FontWeight.w500),
-  //       ),
-  //     ),
-  //   );
-  // }
 }

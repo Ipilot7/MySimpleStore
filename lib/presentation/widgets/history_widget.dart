@@ -21,7 +21,7 @@ class HistoryWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '28 Январь',
+                dataList.first.datatime!,
                 style: AppTextStyles.body20wB,
               ),
               Text(
@@ -41,10 +41,10 @@ class HistoryWidget extends StatelessWidget {
             children: List.generate(
               dataList.length,
               (index) => SoldProducts(
-                desc: dataList[index].desc!.toString(),
+                desc: dataList[index].desc!,
                 isIncoming: dataList[index].isincome == 1,
                 price: dataList[index].price!.toString(),
-                time: dataList[index].datatime!.toString(),
+                time: dataList[index].datatime!,
                 type: '55',
               ),
             ),

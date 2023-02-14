@@ -70,16 +70,29 @@ class _HistoryPageState extends State<HistoryPage> {
                   child: Text('No Task Found'),
                 );
               } else {
+                List filterList = [];
+                List<IncomeExpensesModel> newData = [...snapshot.data!];
+                for (int i = 0; i < newData.length; i++) {
+                  var a = newData[i].datatime;
+                  List<IncomeExpensesModel> set = [];
+                  for (int j = 0; j < newData.length; j++) {
+                    if (newData[j].datatime == a) {
+                      set.add(newData[j]);
+                    }
+                  }
+                  filterList.add(set);
+                }
+                print(filterList);
                 return ListView(
-                  shrinkWrap: true,
-                  controller: widget.controller,
-                  padding: EdgeInsets.zero,
-                  children: [
-                    HistoryWidget(
-                      dataList: snapshot.data!,
-                    ),
-                  ],
-                );
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    controller: widget.controller,
+                    children: List.generate(
+                      filterList.length,
+                      (index) => HistoryWidget(
+                        dataList: filterList[index],
+                      ),
+                    ));
               }
             },
           ),
