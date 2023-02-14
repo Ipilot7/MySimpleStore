@@ -82,7 +82,7 @@ class _HistoryPageState extends State<HistoryPage> {
                   }
                   filterList.add(set);
                 }
-                print(filterList);
+                print(filterList.length);
                 return ListView(
                     padding: EdgeInsets.zero,
                     shrinkWrap: true,
