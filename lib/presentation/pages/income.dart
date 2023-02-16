@@ -141,8 +141,6 @@ class _IncomePageState extends State<IncomePage> {
                           price: double.parse(price.text),
                           datatime: monthReturned(date),
                           isincome: widget.isTrue == true ? 1 : 0));
-                      // print(date);
-                      // monthReturned(date);
                       Navigator.pop(context);
                       price.clear();
                       descInput.clear();

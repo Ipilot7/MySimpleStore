@@ -13,6 +13,11 @@ class HistoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double sum = 0;
+
+    for (int i = 0; i < dataList.length; i++) {
+      sum += dataList[i].price!;
+    }
     return Column(
       children: [
         Padding(
@@ -25,7 +30,7 @@ class HistoryWidget extends StatelessWidget {
                 style: AppTextStyles.body20wB,
               ),
               Text(
-                '+12 500 UZS',
+                '+$sum UZS',
                 style: AppTextStyles.body18w4
                     .copyWith(color: AppColors.lastAction),
               )

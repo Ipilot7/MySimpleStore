@@ -1,46 +1,46 @@
-import 'package:my_simple_store/data/models/income_expenses_model.dart';
+
 
 void main(List<String> args) {
-  List<IncomeExpensesModel> data = [];
-  List filteredList = [];
-  for (int i = 0; i < 12; i++) {
-    if (i == 1) {
-      data.add(IncomeExpensesModel(
-        id: i,
-        price: i + 54323,
-        desc: 'date00',
-      ));
-    } else {
-      data.add(
-        IncomeExpensesModel(
-          id: i,
-          price: i + 54323,
-          desc: 'date0$i',
-        ),
-      );
-    }
-  }
-
+  List<List> filteredList = [];
+  List dataCopy = [];
+  dataCopy.addAll(data);
   for (int i = 0; i < data.length; i++) {
-    var a = data[i].desc;
-    List<IncomeExpensesModel> set = [];
-    for (int j = 0; j < data.length; j++) {
-      if (a == data[j].desc) {
-        set.add(data[i]);
+    String item = data[i];
+    List set = [];
+
+    for (int j = 0; j < dataCopy.length; j++) {
+      if (item == dataCopy[j]) {
+        set.add(dataCopy[j]);
+        dataCopy[j] = 0;
       }
     }
-    filteredList.add(set);
+    if (set.isNotEmpty) {
+      filteredList.add(set);
+    }
   }
-
+  // print(filteredList.length);
   getData(filteredList);
 }
 
-getData(List a) {
-  for (int i = 0; i < a.length; i++) {
-    List<IncomeExpensesModel> first = a[i];
-    for (int j = 0; j < first.length; j++) {
-      print(first[j].desc);
-    }
-    print('>------------------<');
+getData(List<List> list) {
+  for (int i = 0; i < data.length; i++) {
+    print(list[i]);
+    print('>---------<');
   }
 }
+
+List<String> data = [
+  '00',
+  '01',
+  '02',
+  '03',
+  '04',
+  '05',
+  '00',
+  '06',
+  '07',
+  '08',
+  '09',
+  '08',
+  '08',
+];

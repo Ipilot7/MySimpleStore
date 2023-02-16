@@ -65,7 +65,10 @@ equalPressed(TextEditingController userInput) {
   Expression exp = p.parse(finaluserinput);
   ContextModel cm = ContextModel();
   double eval = exp.evaluate(EvaluationType.REAL, cm);
-  if (double.parse('$eval').toStringAsFixed(2) == '0') {}
+  if (double.parse('$eval').toStringAsFixed(2) == '0') {
+
+    
+  }
   userInput.text = double.parse('$eval').toStringAsFixed(2);
   return userInput.text;
 }

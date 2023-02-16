@@ -43,8 +43,8 @@ class _HomePageState extends State<HomePage>
     var panelHeightOpen = MediaQuery.of(context).size.height * 0.8;
     var panelHeightClosed = MediaQuery.of(context).size.height * 0.1;
     return Scaffold(
+      backgroundColor: AppColors.lightBgClr,
       appBar: AppBar(
-        centerTitle: true,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.menu),
@@ -53,8 +53,8 @@ class _HomePageState extends State<HomePage>
           },
         ),
         title: Text(
-          'Home',
-          style: AppTextStyles.body37w5.copyWith(color: AppColors.white),
+          'Wallefy',
+          style: AppTextStyles.body26w5.copyWith(color: AppColors.white),
         ),
       ),
       body: SlidingUpPanel(
@@ -67,7 +67,32 @@ class _HomePageState extends State<HomePage>
             topLeft: Radius.circular(18), topRight: Radius.circular(18)),
         parallaxEnabled: true,
         parallaxOffset: .5,
-        body: const Text('home'),
+        body: ListView(
+          shrinkWrap: true,
+          physics: const BouncingScrollPhysics(),
+          children: [
+            Container(
+              height: 200.h,
+              margin: EdgeInsets.all(10.r),
+              padding: EdgeInsets.all(10.r),
+              decoration: BoxDecoration(
+                  color: AppColors.indigo,
+                  borderRadius: BorderRadius.circular(22),
+                  boxShadow: [
+                    BoxShadow(
+                        color: AppColors.indigo,
+                        blurRadius: 10,
+                        offset: const Offset(5, 7))
+                  ]),
+              child: Column(
+                children: const [
+                  Text('data'),
+                  Text('data'),
+                ],
+              ),
+            )
+          ],
+        ),
         panelBuilder: (scrollcontroler) => HistoryPage(
           controller: scrollcontroler,
           panelController: panelController,

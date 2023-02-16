@@ -32,6 +32,7 @@ class _HistoryPageState extends State<HistoryPage> {
     dataList = dbHelper!.getDataList();
   }
 
+  double allDebit = 0;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -50,7 +51,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
-                '350000000000',
+                '$allDebit',
                 style: AppTextStyles.body22w5.copyWith(color: AppColors.white),
               ),
             ),
@@ -67,30 +68,32 @@ class _HistoryPageState extends State<HistoryPage> {
                 );
               } else if (snapshot.data!.isEmpty) {
                 return const Center(
-                  child: Text('No Task Found'),
+                  child: Text('Данных нет'),
                 );
               } else {
-                // List filterList = [];
-                // List<IncomeExpensesModel> newData = [...snapshot.data!];
-                // for (int i = 0; i < newData.length; i++) {
-                //   var a = newData[i].datatime;
-                //   List<IncomeExpensesModel> set = [];
-                //   for (int j = 0; j < newData.length; j++) {
-                //     if (newData[j].datatime == a) {
-                //       set.add(newData[j]);
-                //     }
-                //   }
-                //   filterList.add(set);
-                // }
-                return ListView(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    controller: widget.controller,
-                    children: [
-                      HistoryWidget(
-                        dataList: snapshot.data!,
-                      ),
-                    ]);
+                List<List<IncomeExpensesModel>> filterList = [];
+                List<IncomeExpensesModel> newData = [...snapshot.data!];
+                for (int i = 0; i < snapshot.data!.length; i++) {
+                  var a = snapshot.data![i].datatime;
+                  List<IncomeExpensesModel> set = [];
+                  for (int j = 0; j < newData.length; j++) {
+                    if (a == newData[j].datatime) {
+                      set.add(newData[j]);
+                      newData[j] = IncomeExpensesModel(datatime: '');
+                    }
+                  }
+                  if (set.isNotEmpty) {
+                    filterList.add(set);
+                  }
+                }
+                return ListView.builder(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  controller: widget.controller,
+                  itemCount: filterList.length,
+                  itemBuilder: (_, index) =>
+                      HistoryWidget(dataList: filterList[index]),
+                );
               }
             },
           ),
