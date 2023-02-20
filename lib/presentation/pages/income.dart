@@ -63,22 +63,42 @@ class _IncomePageState extends State<IncomePage> {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
-              child: Card(
-                child: TextFormField(
-                  autocorrect: true,
-                  controller: descInput,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: 4,
-                  decoration: InputDecoration.collapsed(
-                      hintStyle: AppTextStyles.body16w5,
-                      hintText: 'Добавить заметку'),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Bo`sh bo`lishi mumkin emas';
-                    }
-                    return null;
-                  },
-                ),
+              child: TextFormField(
+                autocorrect: true,
+            
+                controller: descInput,
+                 textAlign: TextAlign.right,
+                keyboardType: TextInputType.multiline,
+                maxLines: 2,
+               decoration: InputDecoration(
+               
+                      hintText: 'Добавить заметку',
+                      hintStyle: AppTextStyles.body22w5
+                          .copyWith(color: AppColors.lastAction),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.blue, width: 3.0.w),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.blue, width: 3.0.w),
+                      ),
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            deleteItem(descInput);
+                          });
+                        },
+                        child: const Icon(
+                          Icons.backspace,
+                        ),
+                      ),),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Bo`sh bo`lishi mumkin emas';
+                  }
+                  return null;
+                },
               ),
             ),
             Padding(
@@ -125,17 +145,16 @@ class _IncomePageState extends State<IncomePage> {
               ),
             ),
             SizedBox(height: 10.h),
-            Row(
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(
                   onPressed: () {
                     if (_fromKey.currentState!.validate()) {
                       var now = DateTime.now();
                       final DateFormat formatter = DateFormat('yyyy-MM-dd');
-
                       final String date = formatter.format(now);
 
-                      dbHelper!.insert(IncomeExpensesModel(
+                    dbHelper!.insert(IncomeExpensesModel(
                           type: 'hello',
                           desc: descInput.text,
                           price: double.parse(price.text),
@@ -146,8 +165,12 @@ class _IncomePageState extends State<IncomePage> {
                       descInput.clear();
                     }
                   },
-                  child: const Text('add Item'),
+                  child: const Text('Добавить'),
                 ),
+                ElevatedButton(onPressed: (){
+                  price.clear();
+                  descInput.clear();
+                }, child: const Text('Очистить'))
               ],
             ),
             SizedBox(height: 10.h),
@@ -201,60 +224,14 @@ class _IncomePageState extends State<IncomePage> {
     );
   }
 
-  String monthReturned(String date) {
-    var day = int.parse(date.substring(8, 10));
-    var month = int.parse(date.substring(5, 7));
-    String monthName = '';
+  
 
-    switch (month) {
-      case 1:
-        monthName = 'Январь';
-        break;
-      case 2:
-        monthName = 'Февраль';
-        break;
-      case 3:
-        monthName = 'Март';
-        break;
-      case 4:
-        monthName = 'Апрель';
-        break;
-      case 5:
-        monthName = 'Май';
-        break;
-      case 6:
-        monthName = 'Июнь';
-        break;
-      case 7:
-        monthName = 'Июль';
-        break;
-      case 8:
-        monthName = 'Август';
-        break;
-      case 9:
-        monthName = 'Сентябрь';
-        break;
-      case 10:
-        monthName = 'Октябрь';
-        break;
-      case 11:
-        monthName = 'Ноябрь';
-        break;
-      case 12:
-        monthName = 'Декабрь';
-        break;
-      default:
-        monthName = 'Нет такого месяца';
-    }
-    return '$day $monthName';
-  }
-
-  _showMessage(String text, {bool isError = true}) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: isError ? Colors.red : Colors.green[400],
-        content: Text(text, style: AppTextStyles.body15w5),
-      ),
-    );
-  }
+  // _showMessage(String text, {bool isError = true}) {
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     SnackBar(
+  //       backgroundColor: isError ? Colors.red : Colors.green[400],
+  //       content: Text(text, style: AppTextStyles.body15w5),
+  //     ),
+  //   );
+  // }
 }
