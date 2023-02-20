@@ -8,6 +8,10 @@ class UserService{
   }
 
   saveUser(IncomeExpensesModel income)async{
-    return await _repository.inserData('table', income.toMap());
+    return await _repository.inserData('income', income.toMap());
+  }
+
+  readAllUsers()async{
+    return await _repository.readData('income');
   }
 }

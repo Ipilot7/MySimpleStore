@@ -7,6 +7,7 @@ import 'package:my_simple_store/config/constants/app_text_styles.dart';
 import 'package:my_simple_store/config/constants/constants.dart';
 import 'package:my_simple_store/data/data_providers/db_handler.dart';
 import 'package:my_simple_store/data/models/income_expenses_model.dart';
+import 'package:my_simple_store/data/services/user_service.dart';
 import 'package:my_simple_store/presentation/widgets/my_button.dart';
 
 class IncomePage extends StatefulWidget {
@@ -20,7 +21,8 @@ class IncomePage extends StatefulWidget {
 }
 
 class _IncomePageState extends State<IncomePage> {
-  DBHelper? dbHelper;
+  var _userService = UserService();
+  // DBHelper? dbHelper;
   late Future<List<IncomeExpensesModel>> datalist;
   final _fromKey = GlobalKey<FormState>();
 
@@ -32,13 +34,13 @@ class _IncomePageState extends State<IncomePage> {
   @override
   void initState() {
     super.initState();
-    dbHelper = DBHelper();
+    // dbHelper = DBHelper();
     // loadData();
   }
 
-  loadData() async {
-    datalist = dbHelper!.getDataList();
-  }
+  // loadData() async {
+  //   datalist = dbHelper!.getDataList();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -65,34 +67,31 @@ class _IncomePageState extends State<IncomePage> {
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
               child: TextFormField(
                 autocorrect: true,
-            
                 controller: descInput,
-                 textAlign: TextAlign.right,
+                textAlign: TextAlign.right,
                 keyboardType: TextInputType.multiline,
                 maxLines: 2,
-               decoration: InputDecoration(
-               
-                      hintText: 'Добавить заметку',
-                      hintStyle: AppTextStyles.body22w5
-                          .copyWith(color: AppColors.lastAction),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.blue, width: 3.0.w),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.blue, width: 3.0.w),
-                      ),
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            deleteItem(descInput);
-                          });
-                        },
-                        child: const Icon(
-                          Icons.backspace,
-                        ),
-                      ),),
+                decoration: InputDecoration(
+                  hintText: 'Добавить заметку',
+                  hintStyle: AppTextStyles.body22w5
+                      .copyWith(color: AppColors.lastAction),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 3.0.w),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 3.0.w),
+                  ),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        deleteItem(descInput);
+                      });
+                    },
+                    child: const Icon(
+                      Icons.backspace,
+                    ),
+                  ),
+                ),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Bo`sh bo`lishi mumkin emas';
@@ -145,32 +144,43 @@ class _IncomePageState extends State<IncomePage> {
               ),
             ),
             SizedBox(height: 10.h),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: ()async {
                     if (_fromKey.currentState!.validate()) {
                       var now = DateTime.now();
                       final DateFormat formatter = DateFormat('yyyy-MM-dd');
                       final String date = formatter.format(now);
 
-                    dbHelper!.insert(IncomeExpensesModel(
-                          type: 'hello',
-                          desc: descInput.text,
-                          price: double.parse(price.text),
-                          datatime: monthReturned(date),
-                          isincome: widget.isTrue == true ? 1 : 0));
-                      Navigator.pop(context);
+                      var result=await _userService.saveUser( IncomeExpensesModel(
+                            type: 'hello',
+                            desc: descInput.text,
+                            price: double.parse(price.text),
+                            datatime: monthReturned(date),
+                            isincome: widget.isTrue == true ? 1 : 0));
+                      print(result);
+                      // dbHel per!.insert(IncomeExpensesModel(
+                      //       type: 'hello',
+                      //       desc: descInput.text,
+                      //       price: double.parse(price.text),
+                      //       datatime: monthReturned(date),
+                      //       isincome: widget.isTrue == true ? 1 : 0));
+
+                      // Navigator.pop(context);
                       price.clear();
                       descInput.clear();
                     }
                   },
                   child: const Text('Добавить'),
                 ),
-                ElevatedButton(onPressed: (){
-                  price.clear();
-                  descInput.clear();
-                }, child: const Text('Очистить'))
+                ElevatedButton(
+                    onPressed: () {
+                      price.clear();
+                      descInput.clear();
+                    },
+                    child: const Text('Очистить'))
               ],
             ),
             SizedBox(height: 10.h),
@@ -223,8 +233,6 @@ class _IncomePageState extends State<IncomePage> {
       ),
     );
   }
-
-  
 
   // _showMessage(String text, {bool isError = true}) {
   //   ScaffoldMessenger.of(context).showSnackBar(

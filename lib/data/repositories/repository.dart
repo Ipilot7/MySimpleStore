@@ -9,7 +9,7 @@ class Repository{
   static Database? _database;
 
   Future<Database?> get database async{
-    if(database!=null){
+    if(_database!=null){
       return _database;
     }
     else {

@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage>
   AnimationController? _animationController;
 
 /////////
-  DBHelper? dbHelper;
+  // DBHelper? dbHelper;
   late Future<List<IncomeExpensesModel>> dataList;
   final _fromKey = GlobalKey<FormState>();
 
@@ -50,12 +50,15 @@ class _HomePageState extends State<HomePage>
 
     super.initState();
 
-     dbHelper = DBHelper();
-    loadData();
+    //  dbHelper = DBHelper();
+    // loadData();
   }
-    loadData() async {
-    dataList = dbHelper!.getDataList();
-  }
+  //   loadData() async {
+  //   dataList = dbHelper!.getDataList();
+  // }
+
+  late List<IncomeExpensesModel> dataList;
+
 
   @override
   Widget build(BuildContext context) {
@@ -86,73 +89,34 @@ class _HomePageState extends State<HomePage>
             topLeft: Radius.circular(18), topRight: Radius.circular(18)),
         parallaxEnabled: true,
         parallaxOffset: .5,
-        body: Column(
-          // shrinkWrap: true,
-          // physics: const BouncingScrollPhysics(),
-          children: [
-            Container(
-              height: 200.h,
-              margin: EdgeInsets.all(10.r),
-              padding: EdgeInsets.all(10.r),
-              decoration: BoxDecoration(
-                  color: AppColors.indigo,
-                  borderRadius: BorderRadius.circular(22),
-                  boxShadow: [
-                    BoxShadow(
-                        color: AppColors.indigo,
-                        blurRadius: 10,
-                        offset: const Offset(5, 7))
-                  ]),
-              child: Column(
-                children: const [
-                  Text('data'),
-                  Text('data'),
-                ],
-              ),
-            ),
-            Expanded(
-          child: FutureBuilder(
-            future: dataList,
-            builder:
-                (context, AsyncSnapshot<List<IncomeExpensesModel>> snapshot) {
-              if (!snapshot.hasData) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (snapshot.data!.isEmpty) {
-                return const Center(
-                  child: Text('Данных нет'),
-                );
-              } else {
-                List<List<IncomeExpensesModel>> filterList = [];
-                List<IncomeExpensesModel> newData = [...snapshot.data!];
-                for (int i = 0; i < snapshot.data!.length; i++) {
-                  var a = snapshot.data![i].datatime;
-                  List<IncomeExpensesModel> set = [];
-                  for (int j = 0; j < newData.length; j++) {
-                    if (a == newData[j].datatime) {
-                      set.add(newData[j]);
-                      newData[j] = IncomeExpensesModel(datatime: '');
-                    }
-                  }
-                  if (set.isNotEmpty) {
-                    filterList.add(set);
-                  }
-                }
-                return ListView.builder(
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  // controller: widget.controller,
-                  itemCount: filterList.length,
-                  itemBuilder: (_, index) =>
-                      HistoryWidget(dataList: filterList[index]),
-                );
-              }
-            },
-          ),
-        ),
-          ],
-        ),
+        body: ListView.builder(itemBuilder: (_,index)=>ListTile(title: Text(data),));
+        //  Column(
+        //   // shrinkWrap: true,
+        //   // physics: const BouncingScrollPhysics(),
+        //   children: [
+        //     Container(
+        //       height: 200.h,
+        //       margin: EdgeInsets.all(10.r),
+        //       padding: EdgeInsets.all(10.r),
+        //       decoration: BoxDecoration(
+        //           color: AppColors.indigo,
+        //           borderRadius: BorderRadius.circular(22),
+        //           boxShadow: [
+        //             BoxShadow(
+        //                 color: AppColors.indigo,
+        //                 blurRadius: 10,
+        //                 offset: const Offset(5, 7))
+        //           ]),
+        //       child: Column(
+        //         children: const [
+        //           Text('data'),
+        //           Text('data'),
+        //         ],
+        //       ),
+        //     ),
+           
+        //   ],
+        // ),
         panelBuilder: (scrollcontroler) => HistoryPage(
           controller: scrollcontroler,
           panelController: panelController,
