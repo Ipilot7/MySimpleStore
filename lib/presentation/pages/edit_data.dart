@@ -10,11 +10,11 @@ class EditData extends StatefulWidget {
 }
 
 class _EditDataState extends State<EditData> {
-  var _descController = TextEditingController();
-  var _priceController = TextEditingController();
+  final _descController = TextEditingController();
+  final _priceController = TextEditingController();
   bool _validateName = false;
   bool _validateContact = false;
-  var _userService=IncomeService();
+  final _userService=IncomeService();
 
   @override
   void initState() {

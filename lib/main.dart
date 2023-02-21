@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_simple_store/presentation/pages/view_page.dart';
 import 'package:my_simple_store/presentation/routes/routes.dart';
 
 void main() {
@@ -13,16 +11,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(designSize: const Size(393, 852),
-        splitScreenMode: true,
-        minTextAdapt: true, builder: (_,child)=>MaterialApp(
-      title: 'Wallefy',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
+    return ScreenUtilInit(
+      designSize: const Size(393, 852),
+      splitScreenMode: true,
+      minTextAdapt: true,
+      builder: (_, child) => MaterialApp(
+        title: 'Wallefy',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.teal,
+        ),
+        onGenerateRoute: (settings) => Routes.generateRoute(settings),
       ),
-      onGenerateRoute: (settings) =>Routes.generateRoute(settings) ,
-    ),);
-   
+    );
   }
 }

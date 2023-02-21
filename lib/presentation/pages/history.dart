@@ -25,8 +25,8 @@ class _HistoryPageState extends State<HistoryPage> {
         userModel.desc = user['desc'];
         userModel.price = user['price'];
         userModel.datatime = user['datatime'];
-        userModel.isincome=user['isincome'];
-        
+        userModel.isincome = user['isincome'];
+
         _dataList.add(userModel);
       });
     });
@@ -44,8 +44,7 @@ class _HistoryPageState extends State<HistoryPage> {
       if (set.isNotEmpty) {
         filterList.add(set);
       }
-    }  
-      
+    }
   }
 
   @override
@@ -60,59 +59,6 @@ class _HistoryPageState extends State<HistoryPage> {
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
             return HistoryWidget(sortedDataList: filterList[index]);
-      
-            
-      
-            //   ),
-            // );
-            // Card(
-            //   child:
-            //   ListTile(
-            //     onTap: () {
-            //       Navigator.push(
-            //           context,
-            //           MaterialPageRoute(
-            //               builder: (context) => ViewUser(
-            //                     user: _userList[index],
-            //                   )));
-            //     },
-            //     leading: const Icon(Icons.person),
-            //     title: Text(_userList[index].desc ?? ''),
-            //     subtitle: Text(_userList[index].price.toString()),
-            //     trailing: Row(
-            //       mainAxisSize: MainAxisSize.min,
-            //       children: [
-            //         IconButton(
-            //             onPressed: () {
-            //               Navigator.push(
-            //                   context,
-            //                   MaterialPageRoute(
-            //                       builder: (context) => EditData(
-            //                             user: _userList[index],
-            //                           ))).then((data) {
-            //                 if (data != null) {
-            //                   getAllUserDetails();
-            //                   _showSuccessSnackBar(
-            //                       'Данные успешно обновлены');
-            //                 }
-            //               });
-            //             },
-            //             icon: const Icon(
-            //               Icons.edit,
-            //               color: Colors.teal,
-            //             )),
-            //         IconButton(
-            //             onPressed: () {
-            //               _deleteFormDialog(context, _userList[index].id);
-            //             },
-            //             icon: const Icon(
-            //               Icons.delete,
-            //               color: Colors.red,
-            //             ))
-            //       ],
-            //     ),
-            //   ),
-            // );
           }),
     );
   }
@@ -121,49 +67,5 @@ class _HistoryPageState extends State<HistoryPage> {
   void initState() {
     getAllUserDetails();
     super.initState();
-  }
-
-  _showSuccessSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
-  }
-
-  _deleteFormDialog(BuildContext context, userId) {
-    return showDialog(
-        context: context,
-        builder: (param) {
-          return AlertDialog(
-            title: const Text(
-              'Вы действительно хотите удалить ?',
-              style: TextStyle(color: Colors.teal, fontSize: 20),
-            ),
-            actions: [
-              TextButton(
-                  style: TextButton.styleFrom(
-                      foregroundColor: Colors.white, // foreground
-                      backgroundColor: Colors.red),
-                  onPressed: () async {
-                    var result = await _userService.deleteData(userId);
-                    if (result != null) {
-                      Navigator.pop(context);
-                      getAllUserDetails();
-                      _showSuccessSnackBar('Данные успешно удалены');
-                    }
-                  },
-                  child: const Text('Удалить')),
-              TextButton(
-                  style: TextButton.styleFrom(
-                      foregroundColor: Colors.white, // foreground
-                      backgroundColor: Colors.teal),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Закрыть'))
-            ],
-          );
-        });
   }
 }

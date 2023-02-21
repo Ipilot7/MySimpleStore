@@ -45,13 +45,13 @@ class _HomePageState extends State<HomePage>  with SingleTickerProviderStateMixi
     });
   }
 
-  _showSuccessSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
-  }
+  // _showSuccessSnackBar(String message) {
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     SnackBar(
+  //       content: Text(message),
+  //     ),
+  //   );
+  // }
 Animation<double>? _animation;
   AnimationController? _animationController;
 
