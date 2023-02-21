@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:math_expressions/math_expressions.dart';
 
 List<String> menuNames = ['Главная', 'История'];
 List<Icon> menuIcons = [
@@ -11,6 +10,13 @@ List floatListIcons = [
   Icons.add_circle_outline_sharp,
   Icons.remove_circle_outline_outlined
 ];
+ showSuccessSnackBar(String message,BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
 
 TextStyle kTextstyle(
     {Color? color,
@@ -54,24 +60,24 @@ bool isOperator(String x) {
 }
 
 // функция для вычисление
-equalPressed(TextEditingController userInput) {
-  String finaluserinput = userInput.text;
-  finaluserinput = finaluserinput.replaceAll('÷', '/');
-  finaluserinput = finaluserinput.replaceAll(
-    'x',
-    '*',
-  );
-  Parser p = Parser();
-  Expression exp = p.parse(finaluserinput);
-  ContextModel cm = ContextModel();
-  double eval = exp.evaluate(EvaluationType.REAL, cm);
-  if (double.parse('$eval').toStringAsFixed(2) == '0') {
+// equalPressed(TextEditingController userInput) {
+//   String finaluserinput = userInput.text;
+//   finaluserinput = finaluserinput.replaceAll('÷', '/');
+//   finaluserinput = finaluserinput.replaceAll(
+//     'x',
+//     '*',
+//   );
+//   Parser p = Parser();
+//   Expression exp = p.parse(finaluserinput);
+//   ContextModel cm = ContextModel();
+//   double eval = exp.evaluate(EvaluationType.REAL, cm);
+//   if (double.parse('$eval').toStringAsFixed(2) == '0') {
 
     
-  }
-  userInput.text = double.parse('$eval').toStringAsFixed(2);
-  return userInput.text;
-}
+//   }
+//   userInput.text = double.parse('$eval').toStringAsFixed(2);
+//   return userInput.text;
+// }
 
 deleteItem(TextEditingController controller) {
   if (controller.text.isNotEmpty) {

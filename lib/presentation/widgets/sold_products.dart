@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_simple_store/config/constants/app_colors.dart';
@@ -8,13 +9,13 @@ class SoldProducts extends StatelessWidget {
     Key? key,
     required this.type,
     required this.desc,
-    required this.time,
+    // required this.time,
     required this.price,
     required this.isIncoming,
   }) : super(key: key);
   final String type;
   final String desc;
-  final String time;
+  // final String time;
   final String price;
   final bool isIncoming;
   @override
@@ -52,8 +53,8 @@ class SoldProducts extends StatelessWidget {
                 style: AppTextStyles.body14w4
                     .copyWith(color: AppColors.lastAction),
               ),
-              SizedBox(height: 5.h),
-              Text(time, style: AppTextStyles.body11w4),
+              // SizedBox(height: 5.h),
+              // Text(time, style: AppTextStyles.body11w4),
             ],
           ),
           const Spacer(),

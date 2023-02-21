@@ -1,10 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:my_simple_store/presentation/pages/income.dart';
-import 'package:my_simple_store/presentation/pages/view.dart';
+import 'package:my_simple_store/presentation/pages/view_page.dart';
 
 class Routes {
   static const viewPage = '/viewPage';
-  static const incomePage = '/incomePage';
+  static const addDataPage = '/addDataPage';
 
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
     try {
@@ -17,10 +18,10 @@ class Routes {
             settings: routeSettings,
             builder: (_) => const ViewPage(),
           );
-        case incomePage:
+        case addDataPage:
           return MaterialPageRoute(
             settings: routeSettings,
-            builder: (_) => IncomePage(
+            builder: (_) => AddData(
               isTrue: args?['isTrue'],
             ),
           );

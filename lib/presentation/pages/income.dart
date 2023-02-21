@@ -1,54 +1,33 @@
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:my_simple_store/config/constants/app_colors.dart';
-import 'package:my_simple_store/config/constants/app_text_styles.dart';
 import 'package:my_simple_store/config/constants/constants.dart';
-import 'package:my_simple_store/data/data_providers/db_handler.dart';
 import 'package:my_simple_store/data/models/income_expenses_model.dart';
-import 'package:my_simple_store/data/services/user_service.dart';
-import 'package:my_simple_store/presentation/widgets/my_button.dart';
+import 'package:my_simple_store/data/services/incomeService.dart';
 
-class IncomePage extends StatefulWidget {
-  const IncomePage({
-    super.key,
-    required this.isTrue,
-  });
+import '../../config/constants/app_text_styles.dart';
+
+class AddData extends StatefulWidget {
+  const AddData({Key? key, required this.isTrue}) : super(key: key);
   final bool isTrue;
   @override
-  State<IncomePage> createState() => _IncomePageState();
+  State<AddData> createState() => _AddDataState();
 }
 
-class _IncomePageState extends State<IncomePage> {
-  var _userService = UserService();
-  // DBHelper? dbHelper;
-  late Future<List<IncomeExpensesModel>> datalist;
-  final _fromKey = GlobalKey<FormState>();
-
-  final price = TextEditingController();
-  final descInput = TextEditingController();
-
-  String text = '';
-
-  @override
-  void initState() {
-    super.initState();
-    // dbHelper = DBHelper();
-    // loadData();
-  }
-
-  // loadData() async {
-  //   datalist = dbHelper!.getDataList();
-  // }
+class _AddDataState extends State<AddData> {
+  TextEditingController _descController = TextEditingController();
+  TextEditingController _priceController = TextEditingController();
+  // var _userDescriptionController = TextEditingController();
+  bool _validateName = false;
+  bool _validateContact = false;
+  // bool _validateDescription = false;
+  var _userService = IncomeService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.lightBgClr,
       appBar: AppBar(
-        toolbarTextStyle: AppTextStyles.body22w5,
         title: widget.isTrue
             ? Text(
                 'Новый доход',
@@ -59,187 +38,101 @@ class _IncomePageState extends State<IncomePage> {
                 style: AppTextStyles.body22w5.copyWith(color: AppColors.white),
               ),
       ),
-      body: Form(
-        key: _fromKey,
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
-              child: TextFormField(
-                autocorrect: true,
-                controller: descInput,
-                textAlign: TextAlign.right,
-                keyboardType: TextInputType.multiline,
-                maxLines: 2,
-                decoration: InputDecoration(
-                  hintText: 'Добавить заметку',
-                  hintStyle: AppTextStyles.body22w5
-                      .copyWith(color: AppColors.lastAction),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 3.0.w),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 3.0.w),
-                  ),
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        deleteItem(descInput);
-                      });
-                    },
-                    child: const Icon(
-                      Icons.backspace,
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Bo`sh bo`lishi mumkin emas';
-                  }
-                  return null;
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: TextFormField(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Bo`sh bo`lishi mumkin emas';
-                    }
-                    return null;
-                  },
-                  readOnly: true,
-                  autofocus: true,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [LengthLimitingTextInputFormatter(9)],
-                  controller: price,
-                  textAlign: TextAlign.right,
-                  style: AppTextStyles.body32w5,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                  controller: _descController,
                   decoration: InputDecoration(
-                      hintText: 'Введите сумму',
-                      hintStyle: AppTextStyles.body22w5
-                          .copyWith(color: AppColors.lastAction),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.blue, width: 3.0.w),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.blue, width: 3.0.w),
-                      ),
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            deleteItem(price);
-                          });
-                        },
-                        child: const Icon(
-                          Icons.backspace,
-                        ),
-                      )),
-                ),
+                    border: const OutlineInputBorder(),
+                    hintText: 'Введите Заметку',
+                    labelText: 'Заметка',
+                    errorText: _validateName
+                        ? 'Поле "Заметка" не должно быть пуста'
+                        : null,
+                  )),
+              const SizedBox(
+                height: 20.0,
               ),
-            ),
-            SizedBox(height: 10.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ElevatedButton(
-                  onPressed: ()async {
-                    if (_fromKey.currentState!.validate()) {
-                      var now = DateTime.now();
-                      final DateFormat formatter = DateFormat('yyyy-MM-dd');
-                      final String date = formatter.format(now);
+              TextField(
+                  keyboardType: TextInputType.number,
+                  controller: _priceController,
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    hintText: 'Введите Сумму',
+                    labelText: 'Сумма',
+                    errorText: _validateContact
+                        ? 'Поле "Сумма" не должно быть пуста'
+                        : null,
+                  )),
+              const SizedBox(
+                height: 20.0,
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              Row(
+                children: [
+                  TextButton(
+                      style: TextButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.teal,
+                          textStyle: const TextStyle(fontSize: 15)),
+                      onPressed: () async {
+                        setState(() {
+                          _descController.text.isEmpty
+                              ? _validateName = true
+                              : _validateName = false;
+                          _priceController.text.isEmpty
+                              ? _validateContact = true
+                              : _validateContact = false;
+                        });
+                        if (_validateName == false &&
+                            _validateContact == false) {
+                          // print("Good Data Can Save");
+                          var now = DateTime.now();
+                          final DateFormat formatter = DateFormat('yyyy-MM-dd');
+                          final String date = formatter.format(now);
 
-                      var result=await _userService.saveUser( IncomeExpensesModel(
-                            type: 'hello',
-                            desc: descInput.text,
-                            price: double.parse(price.text),
-                            datatime: monthReturned(date),
-                            isincome: widget.isTrue == true ? 1 : 0));
-                      print(result);
-                      // dbHel per!.insert(IncomeExpensesModel(
-                      //       type: 'hello',
-                      //       desc: descInput.text,
-                      //       price: double.parse(price.text),
-                      //       datatime: monthReturned(date),
-                      //       isincome: widget.isTrue == true ? 1 : 0));
-
-                      // Navigator.pop(context);
-                      price.clear();
-                      descInput.clear();
-                    }
-                  },
-                  child: const Text('Добавить'),
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      price.clear();
-                      descInput.clear();
-                    },
-                    child: const Text('Очистить'))
-              ],
-            ),
-            SizedBox(height: 10.h),
-            GridView.builder(
-              shrinkWrap: true,
-              itemCount: buttons.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 1.5.h, crossAxisCount: 4),
-              itemBuilder: (BuildContext context, int index) {
-                if (index == 15) {
-                  return MyButton(
-                    buttontapped: () {
-                      setState(() {
-                        equalPressed(price);
-                      });
-                    },
-                    buttonText: buttons[index],
-                    color: AppColors.actionsClmnnClr,
-                    textColor: AppColors.black,
-                  );
-                }
-                //  другие кнопки
-                else {
-                  return MyButton(
-                    buttontapped: () {
-                      setState(
-                        () {
-                          if (isOperator(buttons[index]) &&
-                              isOperator(price.text[price.text.length - 1])) {
-                            price.text =
-                                price.text.substring(0, price.text.length - 1) +
-                                    buttons[index];
-                          } else {
-                            price.text += buttons[index];
-                          }
-                        },
-                      );
-                    },
-                    buttonText: buttons[index],
-                    color: isOperator(buttons[index])
-                        ? AppColors.actionsClmnnClr
-                        : AppColors.white,
-                    textColor: AppColors.black,
-                  );
-                }
-              },
-            ),
-          ],
+                          // var _user = IncomeExpensesModel();
+                          // _user.type = 'hello';
+                          // _user.desc = _descController.text;
+                          // _user.price = double.parse(_priceController.text);
+                          // _user.datatime = monthReturned(date);
+                          // _user.isincome = widget.isTrue == true ? 1 : 0;
+                          var result = await _userService.saveData(
+                              IncomeExpensesModel(
+                                  type: 'hello',
+                                  desc: _descController.text,
+                                  price: double.parse(_priceController.text),
+                                  datatime: monthReturned(date),
+                                  isincome: widget.isTrue == true ? 1 : 0));
+                          Navigator.pop(context, result);
+                        }
+                      },
+                      child: const Text('Добавить')),
+                  const SizedBox(
+                    width: 10.0,
+                  ),
+                  TextButton(
+                      style: TextButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.red,
+                          textStyle: const TextStyle(fontSize: 15)),
+                      onPressed: () {
+                        _descController.text = '';
+                        _priceController.text = '';
+                      },
+                      child: const Text('Очистить'))
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
   }
-
-  // _showMessage(String text, {bool isError = true}) {
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     SnackBar(
-  //       backgroundColor: isError ? Colors.red : Colors.green[400],
-  //       content: Text(text, style: AppTextStyles.body15w5),
-  //     ),
-  //   );
-  // }
 }

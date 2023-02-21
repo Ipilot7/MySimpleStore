@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:my_simple_store/config/constants/app_colors.dart';
 import 'package:my_simple_store/config/constants/app_text_styles.dart';
@@ -15,9 +16,9 @@ class HistoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double sum = 0;
 
-    for (int i = 0; i < dataList.length; i++) {
-      sum += dataList[i].price!;
-    }
+    // for (int i = 0; i < dataList.length; i++) {
+    //   sum += dataList[i].price!;
+    // }
     return Column(
       children: [
         Padding(
@@ -46,11 +47,11 @@ class HistoryWidget extends StatelessWidget {
             children: List.generate(
               dataList.length,
               (index) => SoldProducts(
-                desc: dataList[index].desc!,
+                desc: dataList[index].desc??'',
                 isIncoming: dataList[index].isincome == 1,
-                price: dataList[index].price!.toString(),
-                time: dataList[index].datatime!,
-                type: '55',
+                price: (dataList[index].price??0).toString(),
+                // time: dataList[index].datatime!,
+                type: dataList[index].type??'55',
               ),
             ),
           ),

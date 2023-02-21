@@ -1,21 +1,46 @@
+
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:my_simple_store/config/constants/app_colors.dart';
 import 'package:my_simple_store/config/constants/app_text_styles.dart';
 import 'package:my_simple_store/config/constants/constants.dart';
+import 'package:my_simple_store/data/models/income_expenses_model.dart';
+import 'package:my_simple_store/data/services/incomeService.dart';
 import 'package:my_simple_store/presentation/routes/routes.dart';
 
-class FloatActionButton extends StatelessWidget {
-  const FloatActionButton({
+class FloatActionButton extends StatefulWidget {
+  FloatActionButton({
     Key? key,
     required AnimationController? animationController,
     required Animation<double>? animation,
   })  : _animationController = animationController,
         _animation = animation,
         super(key: key);
-
   final AnimationController? _animationController;
   final Animation<double>? _animation;
+
+  @override
+  State<FloatActionButton> createState() => _FloatActionButtonState();
+}
+
+class _FloatActionButtonState extends State<FloatActionButton> {
+
+  late List<IncomeExpensesModel> _userList = <IncomeExpensesModel>[];
+  final _userService = IncomeService();
+  
+  getAllUserDetails() async {
+    var users = await _userService.readAllData();
+    _userList = <IncomeExpensesModel>[];
+    users.forEach((user) {
+      setState(() {
+        var userModel = IncomeExpensesModel();
+        userModel.id = user['id'];
+        userModel.desc = user['desc'];
+        userModel.price = user['price'];
+        _userList.add(userModel);
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,31 +50,43 @@ class FloatActionButton extends StatelessWidget {
         (index) => Bubble(
           title: floatListNames[index],
           iconColor: Colors.white,
-          bubbleColor: Colors.indigo,
+          bubbleColor: Colors.teal,
           icon: floatListIcons[index],
           titleStyle: AppTextStyles.body16w5.copyWith(color: AppColors.white),
           onPress: () {
             switch (index) {
               case 0:
-                Navigator.pushNamed(context, Routes.incomePage,
+                Navigator.pushNamed(context, Routes.addDataPage,
                     arguments: {'isTrue': true});
+                //     .then((data) {
+                //   if (data != null) {
+                //     getAllUserDetails();
+                //     showSuccessSnackBar('Данные успешно добавлены', context);
+                //   }
+                // });
                 break;
               case 1:
-                Navigator.pushNamed(context, Routes.incomePage,
+                Navigator.pushNamed(context, Routes.addDataPage,
                     arguments: {'isTrue': false});
+                //     .then((data) {
+                //   if (data != null) {
+                //     getAllUserDetails();
+                //     showSuccessSnackBar('Данные успешно добавлены', context);
+                //   }
+                // });
                 break;
             }
-            _animationController!.reverse();
+            widget._animationController!.reverse();
           },
         ),
       ),
-      animation: _animation!,
-      onPress: () => _animationController!.isCompleted
-          ? _animationController!.reverse()
-          : _animationController!.forward(),
+      animation: widget._animation!,
+      onPress: () => widget._animationController!.isCompleted
+          ? widget._animationController!.reverse()
+          : widget._animationController!.forward(),
       iconColor: Colors.white,
       iconData: Icons.add,
-      backGroundColor: Colors.indigo,
+      backGroundColor: Colors.teal,
     );
   }
 }
