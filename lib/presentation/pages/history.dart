@@ -59,13 +59,9 @@ class _HistoryPageState extends State<HistoryPage> {
           itemCount: filterList.length,
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
-            return HistoryWidget(dataList: filterList[index]);
+            return HistoryWidget(sortedDataList: filterList[index]);
       
-            // Card(
-            //   child: ListTile(
-            //     title: Text(_dataList[index].type.toString()),
-            //     subtitle: Text(_dataList[index].desc.toString()),
-            //     trailing: Text(_dataList[index].price.toString()),
+            
       
             //   ),
             // );
