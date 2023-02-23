@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_simple_store/config/constants/app_colors.dart';
@@ -18,11 +17,10 @@ class AddData extends StatefulWidget {
 class _AddDataState extends State<AddData> {
   TextEditingController _descController = TextEditingController();
   TextEditingController _priceController = TextEditingController();
-  // var _userDescriptionController = TextEditingController();
   bool _validateName = false;
   bool _validateContact = false;
-  // bool _validateDescription = false;
   var _userService = IncomeService();
+  String typeExcenses = 'Тип расхода';
 
   @override
   Widget build(BuildContext context) {
@@ -96,13 +94,6 @@ class _AddDataState extends State<AddData> {
                           var now = DateTime.now();
                           final DateFormat formatter = DateFormat('yyyy-MM-dd');
                           final String date = formatter.format(now);
-
-                          // var _user = IncomeExpensesModel();
-                          // _user.type = 'hello';
-                          // _user.desc = _descController.text;
-                          // _user.price = double.parse(_priceController.text);
-                          // _user.datatime = monthReturned(date);
-                          // _user.isincome = widget.isTrue == true ? 1 : 0;
                           var result = await _userService.saveData(
                               IncomeExpensesModel(
                                   type: 'hello',
@@ -126,7 +117,23 @@ class _AddDataState extends State<AddData> {
                         _descController.text = '';
                         _priceController.text = '';
                       },
-                      child: const Text('Очистить'))
+                      child: const Text('Очистить')),
+                  const SizedBox(
+                    width: 10.0,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      bottomSheet(context);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(color: Colors.teal),
+                      ),
+                      child: Text(typeExcenses),
+                    ),
+                  )
                 ],
               )
             ],
@@ -135,4 +142,43 @@ class _AddDataState extends State<AddData> {
       ),
     );
   }
+
+  Future<dynamic> bottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      elevation: 10,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      builder: (BuildContext context) {
+        return SizedBox(
+          height: 200,
+          child: ListView.separated(
+            shrinkWrap: true,
+            padding: EdgeInsets.symmetric(vertical: 10),
+            itemCount: typeExcensesList.length,
+            separatorBuilder: (context, index) => Divider(),
+            itemBuilder: (_, index) => Center(
+                child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        typeExcenses = typeExcensesList[index];
+                      });
+                      Navigator.pop(context);
+                    },
+                    child: Text(typeExcensesList[index]))),
+          ),
+        );
+      },
+    );
+  }
 }
+
+List<String> typeExcensesList = [
+  'Развлечение',
+  'Здоровье',
+  'Рестораны',
+  'Налоги',
+  'Игры',
+  'Интернет',
+];

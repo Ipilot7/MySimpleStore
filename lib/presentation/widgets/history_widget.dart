@@ -27,13 +27,13 @@ class _HistoryWidgetState extends State<HistoryWidget> {
     double rasxod = 0;
     double doxod = 0;
     for (int i = 0; i < widget.sortedDataList.length; i++) {
-      if (widget.sortedDataList[i].isincome==1) {
+      if (widget.sortedDataList[i].isincome == 1) {
         doxod += widget.sortedDataList[i].price!;
       } else {
         rasxod += widget.sortedDataList[i].price!;
       }
     }
-    sum = doxod-rasxod;
+    sum = doxod - rasxod;
     return Column(
       children: [
         Padding(
@@ -45,15 +45,17 @@ class _HistoryWidgetState extends State<HistoryWidget> {
                 widget.sortedDataList.first.datatime!,
                 style: AppTextStyles.body20wB,
               ),
-             sum>0?Text(
-                '+${sum} UZS',
-                style: AppTextStyles.body18w4
-                    .copyWith(color: AppColors.lastAction),
-              ):Text(
-                '-${sum} UZS',
-                style: AppTextStyles.body18w4
-                    .copyWith(color: AppColors.lastAction),
-              )
+              sum > 0
+                  ? Text(
+                      '+${sum} UZS',
+                      style: AppTextStyles.body18w4
+                          .copyWith(color: AppColors.lastAction),
+                    )
+                  : Text(
+                      '${sum} UZS',
+                      style: AppTextStyles.body18w4
+                          .copyWith(color: AppColors.lastAction),
+                    )
             ],
           ),
         ),
@@ -80,8 +82,13 @@ class _HistoryWidgetState extends State<HistoryWidget> {
                       label: 'Изменить',
                     ),
                     SlidableAction(
-                      onPressed: (BuildContext context) => _incomeService!
-                          .deleteData(widget.sortedDataList[index].id),
+                      onPressed: (BuildContext context) {
+                        _incomeService!
+                            .deleteData(widget.sortedDataList[index].id);
+                        setState(() {
+                          widget.sortedDataList.removeAt(index);
+                        });
+                      },
                       backgroundColor: Color(0xFFFE4A49),
                       foregroundColor: Colors.white,
                       icon: Icons.delete,
@@ -113,52 +120,4 @@ class _HistoryWidgetState extends State<HistoryWidget> {
         ? myString
         : '${myString.substring(0, cutoff)}...';
   }
-  // _deleteFormDialog(BuildContext context, userId) {
-  //                         return showDialog(
-  //                             context: context,
-  //                             builder: (param) {
-  //                               return AlertDialog(
-  //                                 title: const Text(
-  //                                   'Вы действительно хотите удалить ?',
-  //                                   style: TextStyle(
-  //                                       color: Colors.teal, fontSize: 20),
-  //                                 ),
-  //                                 actions: [
-  //                                   TextButton(
-  //                                       style: TextButton.styleFrom(
-  //                                           foregroundColor:
-  //                                               Colors.white, // foreground
-  //                                           backgroundColor: Colors.red),
-  //                                       onPressed: () async {
-  //                                         var result = await _incomeService!
-  //                                             .deleteData(userId);
-  //                                         if (result != null) {
-  //                                           Navigator.pop(context);
-  //                                           // getAllUserDetails();
-  //                                           _showSuccessSnackBar(
-  //                                               'Данные успешно удалены');
-  //                                         }
-  //                                       },
-  //                                       child: const Text('Удалить')),
-  //                                   TextButton(
-  //                                       style: TextButton.styleFrom(
-  //                                           foregroundColor:
-  //                                               Colors.white, // foreground
-  //                                           backgroundColor: Colors.teal),
-  //                                       onPressed: () {
-  //                                         Navigator.pop(context);
-  //                                       },
-  //                                       child: const Text('Закрыть'))
-  //                                 ],
-  //                               );
-  //                             });
-  //                       }
-
-  // _showSuccessSnackBar(String message) {
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     SnackBar(
-  //       content: Text(message),
-  //     ),
-  //   );
-  // }
 }

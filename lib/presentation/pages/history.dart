@@ -16,6 +16,7 @@ class _HistoryPageState extends State<HistoryPage> {
   final _userService = IncomeService();
 
   getAllUserDetails() async {
+    List<List<IncomeExpensesModel>> filteredDataList = [];
     List users = await _userService.readAllData();
     _dataList = <IncomeExpensesModel>[];
     users.forEach((user) {
@@ -32,6 +33,7 @@ class _HistoryPageState extends State<HistoryPage> {
     });
 
     List<IncomeExpensesModel> newData = [..._dataList];
+
     for (int i = 0; i < newData.length; i++) {
       var a = newData[i].datatime;
       List<IncomeExpensesModel> set = [];
@@ -42,9 +44,10 @@ class _HistoryPageState extends State<HistoryPage> {
         }
       }
       if (set.isNotEmpty) {
-        filterList.add(set);
+        filteredDataList.add(set);
       }
     }
+    filterList = filteredDataList.reversed.toList();
   }
 
   @override
@@ -54,12 +57,13 @@ class _HistoryPageState extends State<HistoryPage> {
         title: const Text("История"),
       ),
       body: ListView.builder(
-          shrinkWrap: true,
-          itemCount: filterList.length,
-          padding: EdgeInsets.zero,
-          itemBuilder: (context, index) {
-            return HistoryWidget(sortedDataList: filterList[index]);
-          }),
+        shrinkWrap: true,
+        itemCount: filterList.length,
+        padding: EdgeInsets.zero,
+        itemBuilder: (context, index) {
+          return HistoryWidget(sortedDataList: filterList[index]);
+        },
+      ),
     );
   }
 
