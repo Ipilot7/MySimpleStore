@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_simple_store/data/models/income_expenses_model.dart';
 import 'package:my_simple_store/data/services/incomeService.dart';
+
 class EditData extends StatefulWidget {
   final IncomeExpensesModel user;
-  const EditData({Key? key,required this.user}) : super(key: key);
+  const EditData({Key? key, required this.user}) : super(key: key);
 
   @override
   State<EditData> createState() => _EditDataState();
@@ -14,21 +15,22 @@ class _EditDataState extends State<EditData> {
   final _priceController = TextEditingController();
   bool _validateName = false;
   bool _validateContact = false;
-  final _userService=IncomeService();
+  final _userService = IncomeService();
 
   @override
   void initState() {
     setState(() {
-      _descController.text=widget.user.desc??'';
-      _priceController.text=(widget.user.price??0) as String;
+      _descController.text = widget.user.desc ?? '';
+      _priceController.text = ((widget.user.price).toString());
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("SQLite CRUD"),
+        title: const Text("Изменить данные"),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -36,13 +38,6 @@ class _EditDataState extends State<EditData> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Edit New User',
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.teal,
-                    fontWeight: FontWeight.w500),
-              ),
               const SizedBox(
                 height: 20.0,
               ),
@@ -50,10 +45,11 @@ class _EditDataState extends State<EditData> {
                   controller: _descController,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    hintText: 'Enter Name',
-                    labelText: 'Name',
-                    errorText:
-                    _validateName ? 'Name Value Can\'t Be Empty' : null,
+                    hintText: 'Введите новую заметку',
+                    labelText: 'Заметка',
+                    errorText: _validateName
+                        ? 'Поле "Заметка" не должно быть пуста'
+                        : null,
                   )),
               const SizedBox(
                 height: 20.0,
@@ -62,13 +58,12 @@ class _EditDataState extends State<EditData> {
                   controller: _priceController,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    hintText: 'Enter Contact',
-                    labelText: 'Contact',
+                    hintText: 'Введите новую сумму',
+                    labelText: 'Сумма',
                     errorText: _validateContact
-                        ? 'Contact Value Can\'t Be Empty'
+                        ? 'Поле "Сумма" не должно быть пуста'
                         : null,
                   )),
-             
               const SizedBox(
                 height: 20.0,
               ),
@@ -76,7 +71,7 @@ class _EditDataState extends State<EditData> {
                 children: [
                   TextButton(
                       style: TextButton.styleFrom(
-                          primary: Colors.white,
+                          foregroundColor: Colors.white,
                           backgroundColor: Colors.teal,
                           textStyle: const TextStyle(fontSize: 15)),
                       onPressed: () async {
@@ -87,35 +82,36 @@ class _EditDataState extends State<EditData> {
                           _priceController.text.isEmpty
                               ? _validateContact = true
                               : _validateContact = false;
-                         
-
                         });
                         if (_validateName == false &&
-                            _validateContact == false 
-                           ) {
+                            _validateContact == false) {
                           // print("Good Data Can Save");
-                          var _user = IncomeExpensesModel();
-                          _user.id=widget.user.id;
-                          _user.desc = _descController.text;
-                          var result=await _userService.updateData(_user);
-                          Navigator.pop(context,result);
+                          var user = IncomeExpensesModel(
+                            id: widget.user.id,
+                            desc: _descController.text,
+                            type: 'us',
+                            isincome: widget.user.isincome,
+                            datatime: widget.user.datatime,
+                            price: double.parse(_priceController.text),
+                          );
+                          var result = await _userService.updateData(user);
+                          Navigator.pop(context, result);
                         }
                       },
-                      child: const Text('Update Details')),
+                      child: const Text('Обновить')),
                   const SizedBox(
                     width: 10.0,
                   ),
                   TextButton(
                       style: TextButton.styleFrom(
-                          primary: Colors.white,
+                          foregroundColor: Colors.white,
                           backgroundColor: Colors.red,
                           textStyle: const TextStyle(fontSize: 15)),
                       onPressed: () {
                         _descController.text = '';
                         _priceController.text = '';
-                       
                       },
-                      child: const Text('Clear Details'))
+                      child: const Text('Очистить'))
                 ],
               )
             ],

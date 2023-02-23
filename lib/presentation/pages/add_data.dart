@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:my_simple_store/config/constants/app_colors.dart';
 import 'package:my_simple_store/config/constants/constants.dart';
@@ -19,8 +20,9 @@ class _AddDataState extends State<AddData> {
   TextEditingController _priceController = TextEditingController();
   bool _validateName = false;
   bool _validateContact = false;
+  bool _validateType = false;
   var _userService = IncomeService();
-  String typeExcenses = 'Тип расхода';
+  String typeExcenses = 'Выберите категорию';
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,7 @@ class _AddDataState extends State<AddData> {
                   controller: _priceController,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    hintText: 'Введите Сумму',
+                    hintText: 'Введите сумму',
                     labelText: 'Сумма',
                     errorText: _validateContact
                         ? 'Поле "Сумма" не должно быть пуста'
@@ -69,6 +71,32 @@ class _AddDataState extends State<AddData> {
               const SizedBox(
                 height: 20.0,
               ),
+              GestureDetector(
+                onTap: () {
+                  bottomSheet(context);
+                },
+                child: Container(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: Colors.teal),
+                  ),
+                  child: Text(typeExcenses),
+                ),
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              _validateType
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 14.w),
+                      child: Text(
+                        'Вы должны выбрать один из категрии',
+                        style: AppTextStyles.body14w5
+                            .copyWith(color: AppColors.red),
+                      ),
+                    )
+                  : Text(''),
               const SizedBox(
                 height: 20.0,
               ),
@@ -87,16 +115,20 @@ class _AddDataState extends State<AddData> {
                           _priceController.text.isEmpty
                               ? _validateContact = true
                               : _validateContact = false;
+                          typeExcenses == 'Выберите категорию'
+                              ? _validateType = true
+                              : _validateType = false;
                         });
                         if (_validateName == false &&
-                            _validateContact == false) {
+                            _validateContact == false &&
+                            typeExcenses != 'Выберите категорию') {
                           // print("Good Data Can Save");
                           var now = DateTime.now();
                           final DateFormat formatter = DateFormat('yyyy-MM-dd');
                           final String date = formatter.format(now);
                           var result = await _userService.saveData(
                               IncomeExpensesModel(
-                                  type: 'hello',
+                                  type: typeExcenses,
                                   desc: _descController.text,
                                   price: double.parse(_priceController.text),
                                   datatime: monthReturned(date),
@@ -118,22 +150,6 @@ class _AddDataState extends State<AddData> {
                         _priceController.text = '';
                       },
                       child: const Text('Очистить')),
-                  const SizedBox(
-                    width: 10.0,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      bottomSheet(context);
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(color: Colors.teal),
-                      ),
-                      child: Text(typeExcenses),
-                    ),
-                  )
                 ],
               )
             ],

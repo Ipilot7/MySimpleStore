@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:my_simple_store/config/constants/app_colors.dart';
 import 'package:my_simple_store/config/constants/app_text_styles.dart';
 import 'package:my_simple_store/data/models/income_expenses_model.dart';
+import 'package:my_simple_store/presentation/routes/routes.dart';
 import 'package:my_simple_store/presentation/widgets/sold_products.dart';
 
 import '../../data/services/incomeService.dart';
@@ -75,7 +76,20 @@ class _HistoryWidgetState extends State<HistoryWidget> {
                     SlidableAction(
                       // An action can be bigger than the others.
                       flex: 2,
-                      onPressed: edit,
+                      onPressed: (BuildContext context) {
+                        Navigator.pushNamed(context, Routes.editData,
+                            arguments: {
+                              'user': widget.sortedDataList[index]
+                            }).then((data) {
+                          if (data != null) {
+                            setState(() {
+                              
+                            });
+                            _showSuccessSnackBar('User Detail Updated Success');
+                          }
+                        });
+                        ;
+                      },
                       backgroundColor: Color(0xFF7BC043),
                       foregroundColor: Colors.white,
                       icon: Icons.edit,
@@ -119,5 +133,13 @@ class _HistoryWidgetState extends State<HistoryWidget> {
     return (myString.length <= cutoff)
         ? myString
         : '${myString.substring(0, cutoff)}...';
+  }
+
+  _showSuccessSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
   }
 }

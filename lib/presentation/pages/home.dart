@@ -12,12 +12,12 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>  with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   late List<IncomeExpensesModel> _userList = <IncomeExpensesModel>[];
   final _userService = IncomeService();
- @override
+  @override
   void initState() {
-    
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 260),
@@ -26,9 +26,8 @@ class _HomePageState extends State<HomePage>  with SingleTickerProviderStateMixi
     final curvedAnimation =
         CurvedAnimation(curve: Curves.easeInOut, parent: _animationController!);
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
-    
-    super.initState();
 
+    super.initState();
   }
 
   getAllUserDetails() async {
@@ -45,14 +44,7 @@ class _HomePageState extends State<HomePage>  with SingleTickerProviderStateMixi
     });
   }
 
-  // _showSuccessSnackBar(String message) {
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     SnackBar(
-  //       content: Text(message),
-  //     ),
-  //   );
-  // }
-Animation<double>? _animation;
+  Animation<double>? _animation;
   AnimationController? _animationController;
 
   @override
@@ -70,16 +62,14 @@ Animation<double>? _animation;
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => HistoryPage()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => HistoryPage()));
               },
               icon: Icon(Icons.history))
         ],
       ),
       floatingActionButton: FloatActionButton(
-                  animationController: _animationController,
-                  animation: _animation),
-     
+          animationController: _animationController, animation: _animation),
     );
   }
 }
