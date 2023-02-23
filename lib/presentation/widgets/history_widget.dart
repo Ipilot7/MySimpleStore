@@ -82,9 +82,7 @@ class _HistoryWidgetState extends State<HistoryWidget> {
                               'user': widget.sortedDataList[index]
                             }).then((data) {
                           if (data != null) {
-                            setState(() {
-                              
-                            });
+                            setState(() {});
                             _showSuccessSnackBar('User Detail Updated Success');
                           }
                         });
@@ -115,7 +113,7 @@ class _HistoryWidgetState extends State<HistoryWidget> {
                   isIncoming: widget.sortedDataList[index].isincome == 1,
                   price: (widget.sortedDataList[index].price ?? 0).toString(),
                   // time: dataList[index].datatime!,
-                  type: widget.sortedDataList[index].type ?? '55',
+                  type: widget.sortedDataList[index].type ?? '',
                 ),
               ),
             ),

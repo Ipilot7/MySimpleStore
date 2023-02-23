@@ -190,11 +190,3 @@ class _AddDataState extends State<AddData> {
   }
 }
 
-List<String> typeExcensesList = [
-  'Развлечение',
-  'Здоровье',
-  'Рестораны',
-  'Налоги',
-  'Игры',
-  'Интернет',
-];

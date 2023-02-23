@@ -17,18 +17,18 @@ class _HistoryPageState extends State<HistoryPage> {
 
   getAllUserDetails() async {
     List<List<IncomeExpensesModel>> filteredDataList = [];
-    List users = await _userService.readAllData();
+    List allData = await _userService.readAllData();
     _dataList = <IncomeExpensesModel>[];
-    users.forEach((user) {
+    allData.forEach((data) {
       setState(() {
-        var userModel = IncomeExpensesModel();
-        userModel.id = user['id'];
-        userModel.desc = user['desc'];
-        userModel.price = user['price'];
-        userModel.datatime = user['datatime'];
-        userModel.isincome = user['isincome'];
-
-        _dataList.add(userModel);
+        var dataModel = IncomeExpensesModel();
+        dataModel.type = data['type'];
+        dataModel.id = data['id'];
+        dataModel.desc = data['desc'];
+        dataModel.price = data['price'];
+        dataModel.datatime = data['datatime'];
+        dataModel.isincome = data['isincome'];
+        _dataList.add(dataModel);
       });
     });
 
@@ -44,7 +44,8 @@ class _HistoryPageState extends State<HistoryPage> {
         }
       }
       if (set.isNotEmpty) {
-        filteredDataList.add(set);
+        var reversedList = set.reversed.toList();
+        filteredDataList.add(reversedList);
       }
     }
     filterList = filteredDataList.reversed.toList();

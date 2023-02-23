@@ -10,13 +10,13 @@ List floatListIcons = [
   Icons.add_circle_outline_sharp,
   Icons.remove_circle_outline_outlined
 ];
- showSuccessSnackBar(String message,BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
-  }
+showSuccessSnackBar(String message, BuildContext context) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(message),
+    ),
+  );
+}
 
 TextStyle kTextstyle(
     {Color? color,
@@ -73,7 +73,6 @@ bool isOperator(String x) {
 //   double eval = exp.evaluate(EvaluationType.REAL, cm);
 //   if (double.parse('$eval').toStringAsFixed(2) == '0') {
 
-    
 //   }
 //   userInput.text = double.parse('$eval').toStringAsFixed(2);
 //   return userInput.text;
@@ -87,83 +86,60 @@ deleteItem(TextEditingController controller) {
     return controller.text = '';
   }
 }
+
 String monthReturned(String date) {
-    var day = int.parse(date.substring(8, 10));
-    var month = int.parse(date.substring(5, 7));
-    String monthName = '';
+  var day = int.parse(date.substring(8, 10));
+  var month = int.parse(date.substring(5, 7));
+  String monthName = '';
 
-    switch (month) {
-      case 1:
-        monthName = 'Январь';
-        break;
-      case 2:
-        monthName = 'Февраль';
-        break;
-      case 3:
-        monthName = 'Март';
-        break;
-      case 4:
-        monthName = 'Апрель';
-        break;
-      case 5:
-        monthName = 'Май';
-        break;
-      case 6:
-        monthName = 'Июнь';
-        break;
-      case 7:
-        monthName = 'Июль';
-        break;
-      case 8:
-        monthName = 'Август';
-        break;
-      case 9:
-        monthName = 'Сентябрь';
-        break;
-      case 10:
-        monthName = 'Октябрь';
-        break;
-      case 11:
-        monthName = 'Ноябрь';
-        break;
-      case 12:
-        monthName = 'Декабрь';
-        break;
-      default:
-        monthName = 'Нет такого месяца';
-    }
-    return '$day $monthName';
+  switch (month) {
+    case 1:
+      monthName = 'Январь';
+      break;
+    case 2:
+      monthName = 'Февраль';
+      break;
+    case 3:
+      monthName = 'Март';
+      break;
+    case 4:
+      monthName = 'Апрель';
+      break;
+    case 5:
+      monthName = 'Май';
+      break;
+    case 6:
+      monthName = 'Июнь';
+      break;
+    case 7:
+      monthName = 'Июль';
+      break;
+    case 8:
+      monthName = 'Август';
+      break;
+    case 9:
+      monthName = 'Сентябрь';
+      break;
+    case 10:
+      monthName = 'Октябрь';
+      break;
+    case 11:
+      monthName = 'Ноябрь';
+      break;
+    case 12:
+      monthName = 'Декабрь';
+      break;
+    default:
+      monthName = 'Нет такого месяца';
   }
+  return '$day $monthName';
+}
 
-// class  CustomTheme{
-
-//  static Color bgClr = AppColors.nightBgClr;
-//   static Color numClr = AppColors.numbersClr;
-//   static Color numTxtClr = AppColors.white;
-//   static Color resultClr = AppColors.white;
-//   static Color switchClr = AppColors.numbersClr;
-//  static Color switchColor = AppColors.lastAction;
-
-// static changeTheme(Alignment switchAlign, Alignment dayAlign, Alignment nightAlign ) {
-//     if (switchAlign == dayAlign) {
-//         switchAlign = nightAlign;
-//         bgClr = AppColors.lightBgClr;
-//         numClr = AppColors.white;
-//         numTxtClr = AppColors.black;
-//         resultClr = AppColors.black;
-
-//         switchClr = AppColors.white;
-//         switchColor = AppColors.actionsRowColor;
-//       } else {
-//         //night
-//         switchAlign = dayAlign;
-//         bgClr = AppColors.nightBgClr;
-//         numClr = AppColors.numbersClr;
-//         numTxtClr = AppColors.white;
-//         resultClr = AppColors.white;
-
-//         switchClr = AppColors.numbersClr;
-//         switchColor = AppColors.lastAction;
-//       }
-//   }
-// }
+List<String> typeExcensesList = [
+  'Развлечение',
+  'Здоровье',
+  'Рестораны',
+  'Налоги',
+  'Игры',
+  'Интернет',
+];

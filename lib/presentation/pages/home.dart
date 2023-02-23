@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:my_simple_store/data/models/income_expenses_model.dart';
 import 'package:my_simple_store/data/services/incomeService.dart';
@@ -67,6 +68,15 @@ class _HomePageState extends State<HomePage>
               },
               icon: Icon(Icons.history))
         ],
+      ),
+      body: Container(
+        margin: EdgeInsets.all(10.r),
+        width: double.infinity,
+        height: 200.h,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            color: Colors.teal, borderRadius: BorderRadius.circular(10.r)),
+        child: Text('data'),
       ),
       floatingActionButton: FloatActionButton(
           animationController: _animationController, animation: _animation),
