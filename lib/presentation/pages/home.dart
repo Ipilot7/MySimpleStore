@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:my_simple_store/data/models/income_expenses_model.dart';
 import 'package:my_simple_store/data/services/incomeService.dart';
 import 'package:my_simple_store/presentation/components/float_action_button.dart';
 import 'package:my_simple_store/presentation/pages/history.dart';
+import 'package:my_simple_store/presentation/widgets/table_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -69,14 +69,10 @@ class _HomePageState extends State<HomePage>
               icon: Icon(Icons.history))
         ],
       ),
-      body: Container(
-        margin: EdgeInsets.all(10.r),
-        width: double.infinity,
-        height: 200.h,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            color: Colors.teal, borderRadius: BorderRadius.circular(10.r)),
-        child: Text('data'),
+      body: Column(
+        children: [
+          TableWidget(),
+        ],
       ),
       floatingActionButton: FloatActionButton(
           animationController: _animationController, animation: _animation),

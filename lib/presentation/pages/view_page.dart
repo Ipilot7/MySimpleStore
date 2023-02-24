@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:my_simple_store/config/constants/app_colors.dart';
 import 'package:my_simple_store/config/constants/app_text_styles.dart';
+import 'package:my_simple_store/presentation/components/drawer_button.dart';
 import 'package:my_simple_store/presentation/pages/home.dart';
 
 class ViewPage extends StatefulWidget {
@@ -20,7 +22,6 @@ class _ViewPageState extends State<ViewPage> {
       openCurve: Curves.fastOutSlowIn,
       slideWidth: MediaQuery.of(context).size.width * 0.65,
       duration: const Duration(milliseconds: 500),
-      // angle: 0.0,
       menuBackgroundColor: Colors.teal,
       mainScreen: const HomePage(),
       menuScreen: Theme(
@@ -42,7 +43,8 @@ class _ViewPageState extends State<ViewPage> {
                     SizedBox(height: 10.h),
                     Text(
                       'Baxtiyor',
-                      style: AppTextStyles.body20w5,
+                      style: AppTextStyles.body20w5
+                          .copyWith(color: AppColors.white),
                     ),
                     SizedBox(height: 30.h),
                   ],
@@ -51,38 +53,22 @@ class _ViewPageState extends State<ViewPage> {
                 DraverButton(icon: Icons.settings, text: 'Settings'),
                 DraverButton(icon: Icons.info, text: 'О программе'),
                 SizedBox(height: 20.h),
-                DraverButton(icon: Icons.exit_to_app_outlined, text: 'Exit'),
+                GestureDetector(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text('Message'),
+                          content: Text('Your file is saved.'),
+                        ),
+                      );
+                    },
+                    child: DraverButton(
+                        icon: Icons.exit_to_app_outlined, text: 'Exit')),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class DraverButton extends StatelessWidget {
-  const DraverButton({
-    super.key,
-    required this.text,
-    required this.icon,
-  });
-  final String text;
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 10.h),
-      child: Row(
-        children: [
-          Icon(icon),
-          SizedBox(width: 5.w),
-          Text(
-            text,
-            style: AppTextStyles.body18w5,
-          ),
-        ],
       ),
     );
   }
