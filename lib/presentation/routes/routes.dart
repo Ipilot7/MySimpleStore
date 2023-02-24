@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:my_simple_store/presentation/pages/add_data.dart';
 import 'package:my_simple_store/presentation/pages/edit_data.dart';
+import 'package:my_simple_store/presentation/pages/settings.dart';
 import 'package:my_simple_store/presentation/pages/view_page.dart';
 
 class Routes {
   static const viewPage = '/viewPage';
   static const addDataPage = '/addDataPage';
   static const editData = '/editData';
+  static const settings = '/settings';
 
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
     try {
@@ -21,17 +23,23 @@ class Routes {
           );
         case addDataPage:
           return MaterialPageRoute(
-              settings: routeSettings,
-              builder: (_) => AddData(
-                    isTrue: args?['isTrue'],
-                  ));
+            settings: routeSettings,
+            builder: (_) => AddData(
+              isTrue: args?['isTrue'],
+            ),
+          );
         case editData:
           return MaterialPageRoute(
-              settings: routeSettings,
-              builder: (_) => EditData(
-                    user: args?['user'],
-                  ));
-
+            settings: routeSettings,
+            builder: (_) => EditData(
+              user: args?['user'],
+            ),
+          );
+        case settings:
+          return MaterialPageRoute(
+            settings: routeSettings,
+            builder: (_) => SettingsPage(),
+          );
         default:
           return MaterialPageRoute(
             settings: routeSettings,
