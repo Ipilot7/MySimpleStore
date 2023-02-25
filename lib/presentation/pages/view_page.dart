@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:my_simple_store/config/constants/constants.dart';
+import 'package:my_simple_store/config/constants/local_data.dart';
 import 'package:my_simple_store/presentation/components/drawer.dart';
 import 'package:my_simple_store/presentation/pages/home.dart';
+import 'package:my_simple_store/presentation/pages/settings.dart';
 
 class ViewPage extends StatefulWidget {
   const ViewPage({super.key});
@@ -11,6 +14,13 @@ class ViewPage extends StatefulWidget {
 }
 
 class _ViewPageState extends State<ViewPage> {
+  final PageController controller = PageController();
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ZoomDrawer(
@@ -20,10 +30,20 @@ class _ViewPageState extends State<ViewPage> {
       slideWidth: MediaQuery.of(context).size.width * 0.65,
       duration: const Duration(milliseconds: 500),
       menuBackgroundColor: Colors.teal,
-      mainScreen: const HomePage(),
+      mainScreen: PageView(
+          physics: NeverScrollableScrollPhysics(),
+          onPageChanged: (num) {
+            setState(() {
+              selectedIndex = num;
+            });
+          },
+          controller: controller,
+          children: pages),
       menuScreen: Theme(
         data: ThemeData.dark(),
-        child: CustomDrawer(),
+        child: CustomDrawer(
+          controller: controller,
+        ),
       ),
     );
   }

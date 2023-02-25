@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_simple_store/presentation/pages/home.dart';
+import 'package:my_simple_store/presentation/pages/settings.dart';
 
 List<String> menuNames = ['Главная', 'История'];
 List<Icon> menuIcons = [
@@ -59,34 +61,6 @@ bool isOperator(String x) {
   return false;
 }
 
-// функция для вычисление
-// equalPressed(TextEditingController userInput) {
-//   String finaluserinput = userInput.text;
-//   finaluserinput = finaluserinput.replaceAll('÷', '/');
-//   finaluserinput = finaluserinput.replaceAll(
-//     'x',
-//     '*',
-//   );
-//   Parser p = Parser();
-//   Expression exp = p.parse(finaluserinput);
-//   ContextModel cm = ContextModel();
-//   double eval = exp.evaluate(EvaluationType.REAL, cm);
-//   if (double.parse('$eval').toStringAsFixed(2) == '0') {
-
-//   }
-//   userInput.text = double.parse('$eval').toStringAsFixed(2);
-//   return userInput.text;
-// }
-
-deleteItem(TextEditingController controller) {
-  if (controller.text.isNotEmpty) {
-    return controller.text =
-        controller.text.substring(0, controller.text.length - 1);
-  } else {
-    return controller.text = '';
-  }
-}
-
 String monthReturned(String date) {
   var day = int.parse(date.substring(8, 10));
   var month = int.parse(date.substring(5, 7));
@@ -136,10 +110,32 @@ String monthReturned(String date) {
 }
 
 List<String> typeExcensesList = [
+  'Транспорт',
+  'Продукты',
+  'Дети',
+  'Покупки',
+  'Телефон',
+  'Дом',
+  'Аптека',
   'Развлечение',
   'Здоровье',
   'Рестораны',
   'Налоги',
   'Игры',
   'Интернет',
+  'Спорт',
+];
+
+List<Widget> pages = [
+  HomePage(),
+  SettingsPage(),
+  Container(),
+];
+List<String> pageNames = ['Главная', 'Настройки', 'О программе'];
+List<IconData> pageIcons = [Icons.home, Icons.settings, Icons.info];
+
+List<String> currencies = [
+  'USD',
+  'RUB',
+  'UZS',
 ];

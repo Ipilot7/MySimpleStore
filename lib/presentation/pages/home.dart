@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage>
               icon: Icon(Icons.history))
         ],
       ),
-      body: Column(
+      body: ListView(
         children: [
           TableWidget(),
         ],
