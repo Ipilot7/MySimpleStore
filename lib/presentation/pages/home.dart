@@ -47,6 +47,11 @@ class _HomePageState extends State<HomePage>
 
   Animation<double>? _animation;
   AnimationController? _animationController;
+  @override
+  void dispose() {
+    _animationController!.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
