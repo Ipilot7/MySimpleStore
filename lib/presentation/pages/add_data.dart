@@ -175,18 +175,23 @@ class _AddDataState extends State<AddData> {
             itemCount: typeExcensesList.length,
             separatorBuilder: (context, index) => Divider(),
             itemBuilder: (_, index) => Center(
-                child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        typeExcenses = typeExcensesList[index];
-                      });
-                      Navigator.pop(context);
-                    },
-                    child: Text(typeExcensesList[index]))),
+              child: InkWell(
+                onTap: () {
+                  setState(() {
+                    typeExcenses = typeExcensesList[index];
+                  });
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  height: 30.h,
+                  alignment: Alignment.center,
+                  child: Text(typeExcensesList[index]),
+                ),
+              ),
+            ),
           ),
         );
       },
     );
   }
 }
-

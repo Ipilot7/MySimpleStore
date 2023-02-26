@@ -139,3 +139,8 @@ List<String> currencies = [
   'RUB',
   'UZS',
 ];
+List<String> languages = [
+  'English',
+  'Русский',
+  'O\'zbekcha',
+];

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:my_simple_store/config/constants/app_colors.dart';
 import 'package:my_simple_store/config/constants/app_text_styles.dart';
 import 'package:my_simple_store/config/constants/constants.dart';
@@ -46,6 +47,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 (index) => GestureDetector(
                     onTap: () {
                       _onItemTapped(index);
+                      ZoomDrawer.of(context)!.close();
                     },
                     child: DraverButton(
                         icon: pageIcons[index], text: pageNames[index])),
