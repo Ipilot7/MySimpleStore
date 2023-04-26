@@ -20,7 +20,7 @@ class _EditDataState extends State<EditData> {
   bool _validateName = false;
   bool _validateContact = false;
   bool _validateType = false;
-  final _userService = IncomeService();
+  // final _userService = IncomeService();
   String typeExcenses = '';
 
   @override
@@ -76,7 +76,7 @@ class _EditDataState extends State<EditData> {
               ),
               GestureDetector(
                 onTap: () {
-                  bottomSheet(context);
+                  // bottomSheet(context);
                 },
                 child: Container(
                   padding: EdgeInsets.all(8),
@@ -133,8 +133,8 @@ class _EditDataState extends State<EditData> {
                             datatime: widget.user.datatime,
                             price: double.parse(_priceController.text),
                           );
-                          var result = await _userService.updateData(user);
-                          Navigator.pop(context, result);
+                          
+                          Navigator.pop(context);
                         }
                       },
                       child: const Text('Обновить')),
@@ -161,33 +161,33 @@ class _EditDataState extends State<EditData> {
     );
   }
 
-  Future<dynamic> bottomSheet(BuildContext context) {
-    return showModalBottomSheet(
-      context: context,
-      elevation: 10,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      builder: (BuildContext context) {
-        return SizedBox(
-          height: 200,
-          child: ListView.separated(
-            shrinkWrap: true,
-            padding: EdgeInsets.symmetric(vertical: 10),
-            itemCount: typeExcensesList.length,
-            separatorBuilder: (context, index) => Divider(),
-            itemBuilder: (_, index) => Center(
-                child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        typeExcenses = typeExcensesList[index];
-                      });
-                      Navigator.pop(context);
-                    },
-                    child: Text(typeExcensesList[index]))),
-          ),
-        );
-      },
-    );
-  }
+  // Future<dynamic> bottomSheet(BuildContext context) {
+  //   return showModalBottomSheet(
+  //     context: context,
+  //     elevation: 10,
+  //     shape: RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.circular(10.0),
+  //     ),
+  //     builder: (BuildContext context) {
+  //       return SizedBox(
+  //         height: 200,
+  //         child: ListView.separated(
+  //           shrinkWrap: true,
+  //           padding: EdgeInsets.symmetric(vertical: 10),
+  //           itemCount: typeExcensesList.length,
+  //           separatorBuilder: (context, index) => Divider(),
+  //           itemBuilder: (_, index) => Center(
+  //               child: GestureDetector(
+  //                   onTap: () {
+  //                     setState(() {
+  //                       typeExcenses = typeExcensesList[index];
+  //                     });
+  //                     Navigator.pop(context);
+  //                   },
+  //                   child: Text(typeExcensesList[index]))),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 }

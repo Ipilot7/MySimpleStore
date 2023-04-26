@@ -11,30 +11,19 @@ import '../../data/services/incomeService.dart';
 class HistoryWidget extends StatefulWidget {
   const HistoryWidget({
     Key? key,
-    required this.sortedDataList,
   }) : super(key: key);
-  final List<IncomeExpensesModel> sortedDataList;
 
   @override
   State<HistoryWidget> createState() => _HistoryWidgetState();
 }
 
 class _HistoryWidgetState extends State<HistoryWidget> {
-  final IncomeService? _incomeService = IncomeService();
-
   @override
   Widget build(BuildContext context) {
-    double sum = 0;
+    double sum = 1;
     double rasxod = 0;
     double doxod = 0;
-    for (int i = 0; i < widget.sortedDataList.length; i++) {
-      if (widget.sortedDataList[i].isincome == 1) {
-        doxod += widget.sortedDataList[i].price!;
-      } else {
-        rasxod += widget.sortedDataList[i].price!;
-      }
-    }
-    sum = doxod - rasxod;
+
     return Column(
       children: [
         Padding(
@@ -43,17 +32,17 @@ class _HistoryWidgetState extends State<HistoryWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                widget.sortedDataList.first.datatime!,
+                '5fsdf',
                 style: AppTextStyles.body20wB,
               ),
               sum > 0
                   ? Text(
-                      '+${sum} UZS',
+                      '+$sum UZS',
                       style: AppTextStyles.body18w4
                           .copyWith(color: AppColors.lastAction),
                     )
                   : Text(
-                      '${sum} UZS',
+                      '$sum UZS',
                       style: AppTextStyles.body18w4
                           .copyWith(color: AppColors.lastAction),
                     )
@@ -67,53 +56,36 @@ class _HistoryWidgetState extends State<HistoryWidget> {
               borderRadius: BorderRadius.circular(10), color: Colors.white),
           child: Column(
             children: List.generate(
-              widget.sortedDataList.length,
+              10,
               (index) => Slidable(
-                key: ValueKey(widget.sortedDataList[index]),
+                key: const ValueKey(5),
                 endActionPane: ActionPane(
-                  motion: ScrollMotion(),
+                  motion: const ScrollMotion(),
                   children: [
                     SlidableAction(
-                      // An action can be bigger than the others.
                       flex: 2,
-                      onPressed: (BuildContext context) {
-                        Navigator.pushNamed(context, Routes.editData,
-                            arguments: {
-                              'user': widget.sortedDataList[index]
-                            }).then((data) {
-                          if (data != null) {
-                            setState(() {});
-                            _showSuccessSnackBar('User Detail Updated Success');
-                          }
-                        });
-                        ;
-                      },
-                      backgroundColor: Color(0xFF7BC043),
+                      onPressed: (BuildContext context) {},
+                      backgroundColor: const Color(0xFF7BC043),
                       foregroundColor: Colors.white,
                       icon: Icons.edit,
                       label: 'Изменить',
                     ),
                     SlidableAction(
                       onPressed: (BuildContext context) {
-                        _incomeService!
-                            .deleteData(widget.sortedDataList[index].id);
-                        setState(() {
-                          widget.sortedDataList.removeAt(index);
-                        });
+                        setState(() {});
                       },
-                      backgroundColor: Color(0xFFFE4A49),
+                      backgroundColor: const Color(0xFFFE4A49),
                       foregroundColor: Colors.white,
                       icon: Icons.delete,
                       label: 'Удалить',
                     ),
                   ],
                 ),
-                child: SoldProducts(
-                  desc: widget.sortedDataList[index].desc ?? '',
-                  isIncoming: widget.sortedDataList[index].isincome == 1,
-                  price: (widget.sortedDataList[index].price ?? 0).toString(),
-                  // time: dataList[index].datatime!,
-                  type: widget.sortedDataList[index].type ?? '',
+                child: const SoldProducts(
+                  desc: '',
+                  isIncoming: true,
+                  price: '10',
+                  type: '',
                 ),
               ),
             ),
@@ -121,10 +93,6 @@ class _HistoryWidgetState extends State<HistoryWidget> {
         ),
       ],
     );
-  }
-
-  void edit(BuildContext context) {
-//  _incomeService.deleteData(userId);
   }
 
   String truncateWithEllipsis(int cutoff, String myString) {

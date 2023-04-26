@@ -11,46 +11,6 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
-  List<List<IncomeExpensesModel>> filterList = [];
-  late List<IncomeExpensesModel> _dataList = <IncomeExpensesModel>[];
-  final _userService = IncomeService();
-
-  getAllUserDetails() async {
-    List<List<IncomeExpensesModel>> filteredDataList = [];
-    List allData = await _userService.readAllData();
-    _dataList = <IncomeExpensesModel>[];
-    allData.forEach((data) {
-      setState(() {
-        var dataModel = IncomeExpensesModel();
-        dataModel.type = data['type'];
-        dataModel.id = data['id'];
-        dataModel.desc = data['desc'];
-        dataModel.price = data['price'];
-        dataModel.datatime = data['datatime'];
-        dataModel.isincome = data['isincome'];
-        _dataList.add(dataModel);
-      });
-    });
-
-    List<IncomeExpensesModel> newData = [..._dataList];
-
-    for (int i = 0; i < newData.length; i++) {
-      var a = newData[i].datatime;
-      List<IncomeExpensesModel> set = [];
-      for (int j = 0; j < newData.length; j++) {
-        if (a == _dataList[j].datatime) {
-          set.add(newData[j]);
-          newData[j] = IncomeExpensesModel(datatime: '');
-        }
-      }
-      if (set.isNotEmpty) {
-        var reversedList = set.reversed.toList();
-        filteredDataList.add(reversedList);
-      }
-    }
-    filterList = filteredDataList.reversed.toList();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,10 +19,10 @@ class _HistoryPageState extends State<HistoryPage> {
       ),
       body: ListView.builder(
         shrinkWrap: true,
-        itemCount: filterList.length,
+        itemCount: 5,
         padding: EdgeInsets.zero,
         itemBuilder: (context, index) {
-          return HistoryWidget(sortedDataList: filterList[index]);
+          return const HistoryWidget();
         },
       ),
     );
@@ -70,7 +30,6 @@ class _HistoryPageState extends State<HistoryPage> {
 
   @override
   void initState() {
-    getAllUserDetails();
     super.initState();
   }
 }

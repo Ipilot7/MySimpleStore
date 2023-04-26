@@ -15,8 +15,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  late List<IncomeExpensesModel> _userList = <IncomeExpensesModel>[];
-  final _userService = IncomeService();
+  late final List<IncomeExpensesModel> _userList = <IncomeExpensesModel>[];
+  // final _userService = IncomeService();
   @override
   void initState() {
     _animationController = AnimationController(
@@ -31,19 +31,6 @@ class _HomePageState extends State<HomePage>
     super.initState();
   }
 
-  getAllUserDetails() async {
-    var users = await _userService.readAllData();
-    _userList = <IncomeExpensesModel>[];
-    users.forEach((user) {
-      setState(() {
-        var userModel = IncomeExpensesModel();
-        userModel.id = user['id'];
-        userModel.desc = user['desc'];
-        userModel.price = user['price'];
-        _userList.add(userModel);
-      });
-    });
-  }
 
   Animation<double>? _animation;
   AnimationController? _animationController;
@@ -68,14 +55,14 @@ class _HomePageState extends State<HomePage>
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => HistoryPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const HistoryPage()));
               },
-              icon: Icon(Icons.history))
+              icon: const Icon(Icons.history))
         ],
       ),
       body: ListView(
-        children: [
+        children: const [
           TableWidget(),
         ],
       ),

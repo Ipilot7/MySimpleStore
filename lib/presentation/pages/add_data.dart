@@ -16,12 +16,11 @@ class AddData extends StatefulWidget {
 }
 
 class _AddDataState extends State<AddData> {
-  TextEditingController _descController = TextEditingController();
-  TextEditingController _priceController = TextEditingController();
+  final TextEditingController _descController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
   bool _validateName = false;
   bool _validateContact = false;
   bool _validateType = false;
-  var _userService = IncomeService();
   String typeExcenses = 'Выберите категорию';
 
   @override
@@ -76,7 +75,7 @@ class _AddDataState extends State<AddData> {
                   bottomSheet(context);
                 },
                 child: Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     border: Border.all(color: Colors.teal),
@@ -96,7 +95,7 @@ class _AddDataState extends State<AddData> {
                             .copyWith(color: AppColors.red),
                       ),
                     )
-                  : Text(''),
+                  : const Text(''),
               const SizedBox(
                 height: 20.0,
               ),
@@ -122,18 +121,11 @@ class _AddDataState extends State<AddData> {
                         if (_validateName == false &&
                             _validateContact == false &&
                             typeExcenses != 'Выберите категорию') {
-                          // print("Good Data Can Save");
                           var now = DateTime.now();
                           final DateFormat formatter = DateFormat('yyyy-MM-dd');
                           final String date = formatter.format(now);
-                          var result = await _userService.saveData(
-                              IncomeExpensesModel(
-                                  type: typeExcenses,
-                                  desc: _descController.text,
-                                  price: double.parse(_priceController.text),
-                                  datatime: monthReturned(date),
-                                  isincome: widget.isTrue == true ? 1 : 0));
-                          Navigator.pop(context, result);
+
+                          Navigator.pop(context);
                         }
                       },
                       child: const Text('Добавить')),
@@ -171,9 +163,9 @@ class _AddDataState extends State<AddData> {
           height: 200,
           child: ListView.separated(
             shrinkWrap: true,
-            padding: EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             itemCount: typeExcensesList.length,
-            separatorBuilder: (context, index) => Divider(),
+            separatorBuilder: (context, index) => const Divider(),
             itemBuilder: (_, index) => Center(
               child: InkWell(
                 onTap: () {
