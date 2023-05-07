@@ -3,10 +3,10 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:my_simple_store/config/constants/app_colors.dart';
 import 'package:my_simple_store/config/constants/app_text_styles.dart';
 import 'package:my_simple_store/data/models/income_expenses_model.dart';
-import 'package:my_simple_store/presentation/routes/routes.dart';
-import 'package:my_simple_store/presentation/widgets/sold_products.dart';
+import 'package:my_simple_store/config/routes/routes.dart';
+import 'package:my_simple_store/features/home/presentation/widgets/sold_products.dart';
 
-import '../../data/services/incomeService.dart';
+import '../../../../data/services/incomeService.dart';
 
 class HistoryWidget extends StatefulWidget {
   const HistoryWidget({

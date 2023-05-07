@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_simple_store/presentation/pages/home.dart';
-import 'package:my_simple_store/presentation/pages/settings.dart';
+
+import '../../features/home/presentation/pages/home.dart';
+import '../../features/home/presentation/pages/settings.dart';
 
 List<String> menuNames = ['Главная', 'История'];
 List<Icon> menuIcons = [
@@ -127,8 +128,8 @@ List<String> typeExcensesList = [
 ];
 
 List<Widget> pages = [
-  HomePage(),
-  SettingsPage(),
+  const HomePage(),
+  const SettingsPage(),
   Container(),
 ];
 List<String> pageNames = ['Главная', 'Настройки', 'О программе'];

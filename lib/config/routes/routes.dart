@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:my_simple_store/presentation/pages/add_data.dart';
-import 'package:my_simple_store/presentation/pages/edit_data.dart';
-import 'package:my_simple_store/presentation/pages/settings.dart';
-import 'package:my_simple_store/presentation/pages/view_page.dart';
+import 'package:my_simple_store/features/auth/domain/usecases/registration_usecase.dart';
+import 'package:my_simple_store/features/auth/presentation/pages/reg_new_user.dart';
+import 'package:my_simple_store/features/auth/presentation/pages/signin.dart';
+import 'package:my_simple_store/features/auth/presentation/pages/singup.dart';
+
+import '../../features/home/presentation/pages/add_data.dart';
+import '../../features/home/presentation/pages/edit_data.dart';
+import '../../features/home/presentation/pages/settings.dart';
+import '../../features/home/presentation/pages/view_page.dart';
 
 class Routes {
   static const viewPage = '/viewPage';
   static const addDataPage = '/addDataPage';
   static const editData = '/editData';
   static const settings = '/settings';
+  static const signInPage = '/signInPage';
+  static const signUpPage = '/signUpPage';
+  static const regNewUserPage = '/';
 
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
     try {
@@ -38,12 +46,27 @@ class Routes {
         case settings:
           return MaterialPageRoute(
             settings: routeSettings,
-            builder: (_) => SettingsPage(),
+            builder: (_) => const SettingsPage(),
+          );
+        case signInPage:
+          return MaterialPageRoute(
+            settings: routeSettings,
+            builder: (_) => const SignInPage(),
+          );
+        case signUpPage:
+          return MaterialPageRoute(
+            settings: routeSettings,
+            builder: (_) => const RegNewUserPage(),
+          );
+        case regNewUserPage:
+          return MaterialPageRoute(
+            settings: routeSettings,
+            builder: (_) => const RegNewUserPage(),
           );
         default:
           return MaterialPageRoute(
             settings: routeSettings,
-            builder: (_) => const ViewPage(),
+            builder: (_) => const RegNewUserPage(),
           );
       }
     } catch (e) {

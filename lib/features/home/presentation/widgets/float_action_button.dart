@@ -6,7 +6,7 @@ import 'package:my_simple_store/config/constants/app_text_styles.dart';
 import 'package:my_simple_store/config/constants/constants.dart';
 import 'package:my_simple_store/data/models/income_expenses_model.dart';
 import 'package:my_simple_store/data/services/incomeService.dart';
-import 'package:my_simple_store/presentation/routes/routes.dart';
+import 'package:my_simple_store/config/routes/routes.dart';
 
 class FloatActionButton extends StatefulWidget {
   FloatActionButton({

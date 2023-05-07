@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:my_simple_store/data/models/income_expenses_model.dart';
-import 'package:my_simple_store/data/services/incomeService.dart';
-import 'package:my_simple_store/presentation/components/float_action_button.dart';
-import 'package:my_simple_store/presentation/pages/history.dart';
-import 'package:my_simple_store/presentation/widgets/table_widget.dart';
+
+import '../widgets/float_action_button.dart';
+import '../widgets/table_widget.dart';
+import 'history.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage>
           IconButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const HistoryPage()));
+                    MaterialPageRoute(builder: (_) =>  const HistoryPage()));
               },
               icon: const Icon(Icons.history))
         ],

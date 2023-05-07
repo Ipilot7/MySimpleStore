@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_simple_store/data/models/income_expenses_model.dart';
-import 'package:my_simple_store/data/services/incomeService.dart';
-import 'package:my_simple_store/presentation/widgets/history_widget.dart';
+
+import '../widgets/history_widget.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});

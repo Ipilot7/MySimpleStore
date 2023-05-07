@@ -6,7 +6,7 @@ import 'package:my_simple_store/config/constants/constants.dart';
 import 'package:my_simple_store/data/models/income_expenses_model.dart';
 import 'package:my_simple_store/data/services/incomeService.dart';
 
-import '../../config/constants/app_text_styles.dart';
+import '../../../../config/constants/app_text_styles.dart';
 
 class AddData extends StatefulWidget {
   const AddData({Key? key, required this.isTrue}) : super(key: key);

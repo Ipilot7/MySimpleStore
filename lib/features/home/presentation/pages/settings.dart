@@ -4,7 +4,7 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:my_simple_store/config/constants/app_text_styles.dart';
 import 'package:my_simple_store/config/constants/constants.dart';
 import 'package:my_simple_store/config/constants/local_data.dart';
-import 'package:my_simple_store/presentation/widgets/custom_card.dart';
+import 'package:my_simple_store/features/home/presentation/widgets/custom_card.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});

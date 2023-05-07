@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 abstract class AppColors {
   const AppColors._();
 
+  static const Color blue = Color(0xff3461FD);
+  static const Color unActText = Color(0xff94A1C5);
+  static const Color green = Color(0xff34B529);
+  static const Color bgTextfield = Color(0xffF4F7FF);
+  static const Color textfield = Color(0xff415077);
+
   // static Color nightBgClr = const Color(0xFF17171C);
   static Color lightBgClr = const Color(0xFFF1F2F3);
   static Color actionsClmnnClr = const Color(0xFF4B5EFC);

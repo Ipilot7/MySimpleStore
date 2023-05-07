@@ -18,6 +18,7 @@ class _Icons extends _AssetsHolder {
   const _Icons() : super('assets/icons');
 
   // String get logo => "$basePath/logo.svg";
+  String get google => "$basePath/google.svg";
 
 }
 

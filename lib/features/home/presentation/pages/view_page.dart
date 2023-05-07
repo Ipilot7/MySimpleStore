@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:my_simple_store/config/constants/constants.dart';
 import 'package:my_simple_store/config/constants/local_data.dart';
-import 'package:my_simple_store/presentation/components/drawer.dart';
-import 'package:my_simple_store/presentation/pages/home.dart';
-import 'package:my_simple_store/presentation/pages/settings.dart';
+
+import '../widgets/drawer.dart';
 
 class ViewPage extends StatefulWidget {
   const ViewPage({super.key});

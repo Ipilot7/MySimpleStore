@@ -6,7 +6,8 @@ import 'package:my_simple_store/config/constants/app_colors.dart';
 import 'package:my_simple_store/config/constants/app_text_styles.dart';
 import 'package:my_simple_store/config/constants/constants.dart';
 import 'package:my_simple_store/config/constants/local_data.dart';
-import 'package:my_simple_store/presentation/components/drawer_button.dart';
+
+import 'drawer_button.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key, required this.controller});
