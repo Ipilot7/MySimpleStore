@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:http/http.dart' as http;
 import 'package:my_simple_store/core/errors/errors.dart';
 
@@ -14,6 +16,7 @@ class SignInDataSourseImpl implements SignInDataSourse {
       Uri.parse('https://wallefy-gvat.onrender.com/api/auth/login'),
       body: {"email": email, "password": code},
     );
+    log(response.body);
     if (response.statusCode == 200) {
       return response.body;
     } else if (response.statusCode == 404) {
