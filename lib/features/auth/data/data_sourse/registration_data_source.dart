@@ -16,6 +16,8 @@ class RegistrationDataSourceImpl implements RegistrationDataSource {
   @override
   Future<String> registration(
       {required RegistrationModel registrationModel}) async {
+    log(jsonEncode(registrationModel));
+
     final response = await client.post(
       Uri.parse('https://wallefy-gvat.onrender.com/api/auth/regis'),
       body: jsonEncode(registrationModel),

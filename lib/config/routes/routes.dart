@@ -14,9 +14,9 @@ class Routes {
   static const addDataPage = '/addDataPage';
   static const editData = '/editData';
   static const settings = '/settings';
-  static const signInPage = '/signInPage';
+  static const signInPage = '/';
   static const signUpPage = '/signUpPage';
-  static const regNewUserPage = '/';
+  static const regNewUserPage = '/regNewUserPage';
 
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
     try {
