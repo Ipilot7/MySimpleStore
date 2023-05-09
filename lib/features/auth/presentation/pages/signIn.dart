@@ -1,7 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_simple_store/config/routes/routes.dart';
 
 import '../../../../config/constants/app_colors.dart';
 import '../../../../config/constants/app_text_styles.dart';
@@ -165,10 +167,19 @@ class _SignInPageState extends State<SignInPage> {
                         // Navigator.push(context,
                         //     MaterialPageRoute(builder: (_) => const SignUpPage()));
                       },
-                      child: Text(
-                        'Sign up',
-                        style: AppTextStyles.body18w7
-                            .copyWith(color: AppColors.blue),
+                      child: Text.rich(
+                        TextSpan(
+                          text: 'Sign up',
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pushNamed(
+                                  context, Routes.regNewUserPage);
+                            },
+                          style: AppTextStyles.body18w7.copyWith(
+                            color: AppColors.blue,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
                       ),
                     ),
                   ),

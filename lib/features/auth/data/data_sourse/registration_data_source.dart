@@ -23,6 +23,7 @@ class RegistrationDataSourceImpl implements RegistrationDataSource {
       body: jsonEncode(registrationModel),
     );
     log(jsonEncode(registrationModel));
+    log(response.body);
     if (response.statusCode == 200) {
       return response.body;
     } else if (response.statusCode == 404) {

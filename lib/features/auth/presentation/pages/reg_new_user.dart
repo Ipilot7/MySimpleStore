@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_simple_store/features/auth/domain/entities/registration_model.dart';
+import 'package:my_simple_store/features/auth/presentation/widgets/custom_bottom_sheet.dart';
 
 import '../../../../config/constants/all_constants.dart';
 import '../bloc/registration/registration_bloc.dart';
@@ -33,20 +36,21 @@ class _RegNewUserPageState extends State<RegNewUserPage> {
               child: CircularProgressIndicator(),
             );
           } else if (state is RegistrationLoadedState) {
+            showModalBottomSheet(context: context, builder: (context) => CustomBottomSheet( email: email.text),);
             return Center(
               child: Text(
                 state.result,
                 style: AppTextStyles.body22w4,
               ),
             );
-          } else if(state is RegistrationErrorState){
+          } else if (state is RegistrationErrorState) {
             return Center(
               child: Text(
                 state.message,
                 style: AppTextStyles.body22w4,
               ),
             );
-          }else {
+          } else {
             return SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -127,23 +131,43 @@ class _RegNewUserPageState extends State<RegNewUserPage> {
   Future<dynamic> showCustomDialog(BuildContext context, String text) {
     return showDialog(
       context: context,
+      barrierColor: Colors.transparent,
       builder: (context) {
-        return Container(
-          height: 200.h,
-          width: 100.w,
-          padding: EdgeInsets.all(15.h),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.r),
-            color: AppColors.white,
-          ),
-          child: Text(
-            text,
-            style: AppTextStyles.body20w5,
+        // return AlertDialog(
+        //   title: Text(
+        //     text,
+        //     style: AppTextStyles.body20w5,
+        //   ),
+        //   actions: [
+        //     TextButton(
+        //       onPressed: () => Navigator.pop(context),
+        //       child: Text(
+        //         'OK',
+        //         style: AppTextStyles.body24wB,
+        //       ),
+        //     )
+        //   ],
+        // );
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Center(
+            child: Container(
+              height: 200.h,
+              width: 200.w,
+              // margin: EdgeInsets.symmetric(horizontal: 30.w, vertical: 250.h),
+              padding: EdgeInsets.all(15.h),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.r),
+                color: AppColors.white,
+              ),
+              child: Text(
+                text,
+                style: AppTextStyles.body20w5,
+              ),
+            ),
           ),
         );
       },
     );
   }
-
-  
 }
