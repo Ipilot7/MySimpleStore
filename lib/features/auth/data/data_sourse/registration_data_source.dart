@@ -22,7 +22,6 @@ class RegistrationDataSourceImpl implements RegistrationDataSource {
       Uri.parse('https://wallefy-gvat.onrender.com/api/auth/regis'),
       body: jsonEncode(registrationModel),
     );
-    log(jsonEncode(registrationModel));
     log(response.body);
     if (response.statusCode == 200) {
       return response.body;

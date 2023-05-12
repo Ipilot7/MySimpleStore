@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_simple_store/config/routes/routes.dart';
 import 'package:my_simple_store/features/auth/presentation/bloc/sign_in/sign_in_bloc.dart';
+import 'package:my_simple_store/features/auth/presentation/pages/signIn.dart';
 import 'features/auth/presentation/bloc/registration/registration_bloc.dart';
 import 'injection_container.dart' as di;
 
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.teal,
           ),
-          onGenerateRoute: (settings) => Routes.generateRoute(settings),
+          // onGenerateRoute: (settings) => Routes.generateRoute(settings),
+          home: const SignInPage(),
         ),
       ),
     );

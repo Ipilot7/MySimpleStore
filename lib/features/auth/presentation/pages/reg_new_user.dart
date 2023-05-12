@@ -36,7 +36,13 @@ class _RegNewUserPageState extends State<RegNewUserPage> {
               child: CircularProgressIndicator(),
             );
           } else if (state is RegistrationLoadedState) {
-            showModalBottomSheet(context: context, builder: (context) => CustomBottomSheet( email: email.text),);
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => CustomBottomSheet(
+                email: email.text,
+                sendFunc: () {},
+              ),
+            );
             return Center(
               child: Text(
                 state.result,

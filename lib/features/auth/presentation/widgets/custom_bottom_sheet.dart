@@ -7,8 +7,9 @@ import 'custom_button.dart';
 import 'custom_textfield.dart';
 
 class CustomBottomSheet extends StatefulWidget {
-  const CustomBottomSheet({super.key, required this.email});
+  const CustomBottomSheet({super.key, required this.email, required this.sendFunc});
   final String email;
+  final Function() sendFunc;
 
   @override
   State<CustomBottomSheet> createState() => _CustomBottomSheetState();
@@ -107,7 +108,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
               defaultPinTheme: defaultPinTheme,
               focusedPinTheme: focusedPinTheme,
               submittedPinTheme: focusedPinTheme,
-              length: 4,
+              length: 6,
               validator: (s) {
                 setState(() {
                   isNext = true;
@@ -122,12 +123,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
           Padding(
             padding: EdgeInsets.only(top: 67.h, bottom: 68.h),
             child: CustomButton(
-              onPressed: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (_) => const RegNewUserPage()));
-              },
+              onPressed: widget.sendFunc,
               color: AppColors.white,
               text: 'Send',
               borderColor: AppColors.blue,

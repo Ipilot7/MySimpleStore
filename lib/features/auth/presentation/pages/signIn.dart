@@ -165,7 +165,7 @@ class _SignInPageState extends State<SignInPage> {
                     child: GestureDetector(
                       onTap: () {
                         // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (_) => const SignUpPage()));
+                        //     MaterialPageRoute(builder: (_) => const ForgotPasswordPage()));
                       },
                       child: Text.rich(
                         TextSpan(

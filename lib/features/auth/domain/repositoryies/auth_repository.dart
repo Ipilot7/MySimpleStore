@@ -8,4 +8,6 @@ abstract class AuthRepository {
       {required String email, required String code});
   Future<Either<Failure, String>> registration(
       {required RegistrationModel registrationModel});
+  Future<Either<Failure, String>> sendEmailFPassword({ required String email});
+  Future<Either<Failure, String>> verifyCodeFPassword({ required String code});
 }

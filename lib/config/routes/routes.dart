@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_simple_store/features/auth/domain/usecases/registration_usecase.dart';
 import 'package:my_simple_store/features/auth/presentation/pages/reg_new_user.dart';
 import 'package:my_simple_store/features/auth/presentation/pages/signin.dart';
-import 'package:my_simple_store/features/auth/presentation/pages/singup.dart';
+import 'package:my_simple_store/features/auth/presentation/pages/forgot_password_page.dart';
 
 import '../../features/home/presentation/pages/add_data.dart';
 import '../../features/home/presentation/pages/edit_data.dart';
@@ -14,8 +13,8 @@ class Routes {
   static const addDataPage = '/addDataPage';
   static const editData = '/editData';
   static const settings = '/settings';
-  static const signInPage = '/';
-  static const signUpPage = '/signUpPage';
+  static const signInPage = '/signInPage';
+  static const forgotPasswordPage = '/';
   static const regNewUserPage = '/regNewUserPage';
 
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -53,10 +52,10 @@ class Routes {
             settings: routeSettings,
             builder: (_) => const SignInPage(),
           );
-        case signUpPage:
+        case forgotPasswordPage:
           return MaterialPageRoute(
             settings: routeSettings,
-            builder: (_) => const RegNewUserPage(),
+            builder: (_) => const ForgotPasswordPage(),
           );
         case regNewUserPage:
           return MaterialPageRoute(
