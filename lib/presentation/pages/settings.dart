@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:my_simple_store/config/constants/app_text_styles.dart';
-import 'package:my_simple_store/config/constants/constants.dart';
-import 'package:my_simple_store/config/constants/local_data.dart';
 import 'package:my_simple_store/presentation/widgets/custom_card.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -27,7 +25,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ZoomDrawer.of(context)!.toggle();
           },
         ),
-        title: Text('Настройка'),
+        title: const Text('Настройка'),
       ),
       body: ListView(
         children: [
@@ -38,7 +36,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 children: [
                   CircleAvatar(
                     radius: 50.r,
-                    backgroundImage: AssetImage('assets/images/defAvatar.jpg'),
+                    backgroundImage:
+                        const AssetImage('assets/images/defAvatar.jpg'),
                   ),
                   SizedBox(width: 20.h),
                   Column(
@@ -53,98 +52,11 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ]),
           ),
-          CustomCard(
-              child: Column(
-            children: [
-              Row(
-                children: [
-                  Text(
-                    'Язык: ',
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (_) => AlertDialog(
-                          content: SizedBox(
-                            // height: 300.h,
-                            width: 50.w,
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: languages.length,
-                              itemBuilder: (_, index) => Center(
-                                child: InkWell(
-                                  onTap: () {
-                                    selLanguage = index;
-                                    setState(() {
-                                      defaultLanguage = languages[selLanguage];
-                                    });
-                                    Navigator.pop(context);
-                                  },
-                                  child: Container(
-                                      height: 30.h,
-                                      alignment: Alignment.center,
-                                      child: Text(languages[index])),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      defaultLanguage,
-                      style: AppTextStyles.body18w5
-                          .copyWith(decoration: TextDecoration.underline),
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Валюта: ',
-                  ),
-                  GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (_) => AlertDialog(
-                            content: SizedBox(
-                              width: 50.w,
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: currencies.length,
-                                itemBuilder: (_, index) => Center(
-                                  child: InkWell(
-                                    onTap: () {
-                                      selCurrency = index;
-                                      setState(() {
-                                        defaultCurrency =
-                                            currencies[selCurrency];
-                                      });
-                                      Navigator.pop(context);
-                                    },
-                                    child: Container(
-                                        height: 30.h,
-                                        alignment: Alignment.center,
-                                        child: Text(currencies[index])),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        defaultCurrency,
-                        style: AppTextStyles.body18w5
-                            .copyWith(decoration: TextDecoration.underline),
-                      ))
-                ],
-              ),
-            ],
-          ))
+          const CustomCard(child: Text('Премиум - версия')),
+          const CustomCard(child: Text('Долги')),
+          const CustomCard(child: Text('Категории')),
+          const CustomCard(child: Text('Экспорт')),
+          const CustomCard(child: Text('Основная валюта')),
         ],
       ),
     );
