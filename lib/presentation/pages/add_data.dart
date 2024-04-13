@@ -16,13 +16,13 @@ class AddData extends StatefulWidget {
 }
 
 class _AddDataState extends State<AddData> {
-  TextEditingController _descController = TextEditingController();
-  TextEditingController _priceController = TextEditingController();
+  final TextEditingController _descController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
   bool _validateName = false;
   bool _validateContact = false;
   bool _validateType = false;
-  var _userService = IncomeService();
-  String typeExcenses = 'Выберите категорию';
+  final _userService = IncomeService();
+  String typeExcenses = 'KAtegoriyani tanlang';
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +30,11 @@ class _AddDataState extends State<AddData> {
       appBar: AppBar(
         title: widget.isTrue
             ? Text(
-                'Новый доход',
+                'Yangi kirim',
                 style: AppTextStyles.body22w5.copyWith(color: AppColors.white),
               )
             : Text(
-                'Новый расход',
+                'Yangi chiqim',
                 style: AppTextStyles.body22w5.copyWith(color: AppColors.white),
               ),
       ),
@@ -48,11 +48,9 @@ class _AddDataState extends State<AddData> {
                   controller: _descController,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    hintText: 'Введите Заметку',
-                    labelText: 'Заметка',
-                    errorText: _validateName
-                        ? 'Поле "Заметка" не должно быть пуста'
-                        : null,
+                    hintText: 'Eslatmani kiriting',
+                    labelText: 'Eslatma',
+                    errorText: _validateName ? "Eslatma maydoni bo'sh bo'lmasligi kerak" : null,
                   )),
               const SizedBox(
                 height: 20.0,
@@ -62,11 +60,9 @@ class _AddDataState extends State<AddData> {
                   controller: _priceController,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    hintText: 'Введите сумму',
-                    labelText: 'Сумма',
-                    errorText: _validateContact
-                        ? 'Поле "Сумма" не должно быть пуста'
-                        : null,
+                    hintText: 'Summani kiriting',
+                    labelText: 'Miqdor',
+                    errorText: _validateContact ? "'Miqdor' maydoni bo'sh bo'lmasligi kerak" : null,
                   )),
               const SizedBox(
                 height: 20.0,
@@ -76,7 +72,7 @@ class _AddDataState extends State<AddData> {
                   bottomSheet(context);
                 },
                 child: Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     border: Border.all(color: Colors.teal),
@@ -91,12 +87,11 @@ class _AddDataState extends State<AddData> {
                   ? Padding(
                       padding: EdgeInsets.only(left: 14.w),
                       child: Text(
-                        'Вы должны выбрать один из категрии',
-                        style: AppTextStyles.body14w5
-                            .copyWith(color: AppColors.red),
+                        'Kategoriyalardan birini tanlang',
+                        style: AppTextStyles.body14w5.copyWith(color: AppColors.red),
                       ),
                     )
-                  : Text(''),
+                  : const Text(''),
               const SizedBox(
                 height: 20.0,
               ),
@@ -109,34 +104,28 @@ class _AddDataState extends State<AddData> {
                           textStyle: const TextStyle(fontSize: 15)),
                       onPressed: () async {
                         setState(() {
-                          _descController.text.isEmpty
-                              ? _validateName = true
-                              : _validateName = false;
-                          _priceController.text.isEmpty
-                              ? _validateContact = true
-                              : _validateContact = false;
-                          typeExcenses == 'Выберите категорию'
-                              ? _validateType = true
-                              : _validateType = false;
+                          _descController.text.isEmpty ? _validateName = true : _validateName = false;
+                          _priceController.text.isEmpty ? _validateContact = true : _validateContact = false;
+                          typeExcenses == 'Kategoriyani tanlang' ? _validateType = true : _validateType = false;
                         });
                         if (_validateName == false &&
                             _validateContact == false &&
-                            typeExcenses != 'Выберите категорию') {
+                            typeExcenses != 'Kategoriyani tanlang') {
                           // print("Good Data Can Save");
                           var now = DateTime.now();
                           final DateFormat formatter = DateFormat('yyyy-MM-dd');
                           final String date = formatter.format(now);
-                          var result = await _userService.saveData(
-                              IncomeExpensesModel(
-                                  type: typeExcenses,
-                                  desc: _descController.text,
-                                  price: double.parse(_priceController.text),
-                                  datatime: monthReturned(date),
-                                  isincome: widget.isTrue == true ? 1 : 0));
+                          var result = await _userService.saveData(IncomeExpensesModel(
+                              type: typeExcenses,
+                              desc: _descController.text,
+                              price: double.parse(_priceController.text),
+                              datatime: monthReturned(date),
+                              isincome: widget.isTrue == true ? 1 : 0));
+                          // ignore: use_build_context_synchronously
                           Navigator.pop(context, result);
                         }
                       },
-                      child: const Text('Добавить')),
+                      child: const Text("Qo'shish")),
                   const SizedBox(
                     width: 10.0,
                   ),
@@ -149,7 +138,7 @@ class _AddDataState extends State<AddData> {
                         _descController.text = '';
                         _priceController.text = '';
                       },
-                      child: const Text('Очистить')),
+                      child: const Text('Tozalash')),
                 ],
               )
             ],
@@ -171,9 +160,9 @@ class _AddDataState extends State<AddData> {
           height: 200,
           child: ListView.separated(
             shrinkWrap: true,
-            padding: EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             itemCount: typeExcensesList.length,
-            separatorBuilder: (context, index) => Divider(),
+            separatorBuilder: (context, index) => const Divider(),
             itemBuilder: (_, index) => Center(
               child: InkWell(
                 onTap: () {

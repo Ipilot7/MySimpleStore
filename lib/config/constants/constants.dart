@@ -2,16 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:my_simple_store/presentation/pages/home.dart';
 import 'package:my_simple_store/presentation/pages/settings.dart';
 
-List<String> menuNames = ['Главная', 'История'];
-List<Icon> menuIcons = [
-  const Icon(Icons.home_outlined),
-  const Icon(Icons.history_outlined)
-];
-List floatListNames = ["Новый доход", "Новый расход"];
-List floatListIcons = [
-  Icons.add_circle_outline_sharp,
-  Icons.remove_circle_outline_outlined
-];
+List<String> menuNames = ['Uy', 'Tarix'];
+List<Icon> menuIcons = [const Icon(Icons.home_outlined), const Icon(Icons.history_outlined)];
+List floatListNames = ["Yangi daromad", "Yangi harajat"];
+List floatListIcons = [Icons.add_circle_outline_sharp, Icons.remove_circle_outline_outlined];
 showSuccessSnackBar(String message, BuildContext context) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
@@ -21,11 +15,7 @@ showSuccessSnackBar(String message, BuildContext context) {
 }
 
 TextStyle kTextstyle(
-    {Color? color,
-    double? size = 32,
-    FontWeight fontWeight = FontWeight.w400,
-    double? height,
-    double? letterSpasing}) {
+    {Color? color, double? size = 32, FontWeight fontWeight = FontWeight.w400, double? height, double? letterSpasing}) {
   return TextStyle(
       color: color ?? Colors.white,
       fontSize: size,
@@ -68,70 +58,70 @@ String monthReturned(String date) {
 
   switch (month) {
     case 1:
-      monthName = 'Январь';
+      monthName = 'Yanvar';
       break;
     case 2:
-      monthName = 'Февраль';
+      monthName = 'Fevral';
       break;
     case 3:
-      monthName = 'Март';
+      monthName = 'Mart';
       break;
     case 4:
-      monthName = 'Апрель';
+      monthName = 'Aprel';
       break;
     case 5:
-      monthName = 'Май';
+      monthName = 'May';
       break;
     case 6:
-      monthName = 'Июнь';
+      monthName = 'Iyun';
       break;
     case 7:
-      monthName = 'Июль';
+      monthName = 'Iyul';
       break;
     case 8:
-      monthName = 'Август';
+      monthName = 'Avgust';
       break;
     case 9:
-      monthName = 'Сентябрь';
+      monthName = 'Sentyabr';
       break;
     case 10:
-      monthName = 'Октябрь';
+      monthName = 'Oktyabr';
       break;
     case 11:
-      monthName = 'Ноябрь';
+      monthName = 'Noyabr';
       break;
     case 12:
-      monthName = 'Декабрь';
+      monthName = 'Dekabr';
       break;
     default:
-      monthName = 'Нет такого месяца';
+      monthName = 'Bunday oy yo\'q';
   }
   return '$day $monthName';
 }
 
 List<String> typeExcensesList = [
-  'Транспорт',
-  'Продукты',
-  'Дети',
-  'Покупки',
-  'Телефон',
-  'Дом',
-  'Аптека',
-  'Развлечение',
-  'Здоровье',
-  'Рестораны',
-  'Налоги',
-  'Игры',
-  'Интернет',
-  'Спорт',
+  'Transport',
+  'Mahsulotlar',
+  'Bolalar',
+  'Xaridlar',
+  'Telefon',
+  'Uy',
+  'Dorixona',
+  'O\'yin-kulgi',
+  'Salomatlik',
+  'Restorantlar',
+  'Soliqlar',
+  'O\'yinlar',
+  'Internet',
+  'Sport',
 ];
 
 List<Widget> pages = [
-  HomePage(),
-  SettingsPage(),
+  const HomePage(),
+  const SettingsPage(),
   Container(),
 ];
-List<String> pageNames = ['Главная', 'Настройки', 'О программе'];
+List<String> pageNames = ['Asosiy menu', 'Sozlamalar', 'Dastur haqida'];
 List<IconData> pageIcons = [Icons.home, Icons.settings, Icons.info];
 
 List<String> currencies = [

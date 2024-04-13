@@ -37,7 +37,7 @@ class _EditDataState extends State<EditData> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Изменить данные"),
+        title: const Text("Ma'lumotlarni tahrirlash"),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -52,11 +52,9 @@ class _EditDataState extends State<EditData> {
                   controller: _descController,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    hintText: 'Введите новую заметку',
-                    labelText: 'Заметка',
-                    errorText: _validateName
-                        ? 'Поле "Заметка" не должно быть пуста'
-                        : null,
+                    hintText: 'Yangi Eslatma kitirish',
+                    labelText: 'Eslatma',
+                    errorText: _validateName ? "'Eslatma' maydoni bo'sh bo'lmasligi kerak" : null,
                   )),
               const SizedBox(
                 height: 20.0,
@@ -65,11 +63,9 @@ class _EditDataState extends State<EditData> {
                   controller: _priceController,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    hintText: 'Введите новую сумму',
-                    labelText: 'Сумма',
-                    errorText: _validateContact
-                        ? 'Поле "Сумма" не должно быть пуста'
-                        : null,
+                    hintText: 'Yangi Summa kiritish',
+                    labelText: 'Summa',
+                    errorText: _validateContact ? "Summa maydoni bo'sh bo'lmasligi kerak" : null,
                   )),
               const SizedBox(
                 height: 20.0,
@@ -94,9 +90,8 @@ class _EditDataState extends State<EditData> {
                   ? Padding(
                       padding: EdgeInsets.only(left: 14.w),
                       child: Text(
-                        'Вы должны выбрать один из категрии',
-                        style: AppTextStyles.body14w5
-                            .copyWith(color: AppColors.red),
+                        'Siz kategoriyalardan birini tanlashingiz kerak',
+                        style: AppTextStyles.body14w5.copyWith(color: AppColors.red),
                       ),
                     )
                   : Text(''),
@@ -112,18 +107,11 @@ class _EditDataState extends State<EditData> {
                           textStyle: const TextStyle(fontSize: 15)),
                       onPressed: () async {
                         setState(() {
-                          _descController.text.isEmpty
-                              ? _validateName = true
-                              : _validateName = false;
-                          _priceController.text.isEmpty
-                              ? _validateContact = true
-                              : _validateContact = false;
-                          typeExcenses == 'Выберите категорию'
-                              ? _validateType = true
-                              : _validateType = false;
+                          _descController.text.isEmpty ? _validateName = true : _validateName = false;
+                          _priceController.text.isEmpty ? _validateContact = true : _validateContact = false;
+                          typeExcenses == 'Kategoriyani kiriting' ? _validateType = true : _validateType = false;
                         });
-                        if (_validateName == false &&
-                            _validateContact == false) {
+                        if (_validateName == false && _validateContact == false) {
                           // print("Good Data Can Save");
                           var user = IncomeExpensesModel(
                             id: widget.user.id,
@@ -137,7 +125,7 @@ class _EditDataState extends State<EditData> {
                           Navigator.pop(context, result);
                         }
                       },
-                      child: const Text('Обновить')),
+                      child: const Text('Yangilash')),
                   const SizedBox(
                     width: 10.0,
                   ),
@@ -150,7 +138,7 @@ class _EditDataState extends State<EditData> {
                       _descController.text = '';
                       _priceController.text = '';
                     },
-                    child: const Text('Очистить'),
+                    child: const Text('Tozalash'),
                   ),
                 ],
               )

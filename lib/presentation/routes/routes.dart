@@ -38,7 +38,7 @@ class Routes {
         case settings:
           return MaterialPageRoute(
             settings: routeSettings,
-            builder: (_) => SettingsPage(),
+            builder: (_) => const SettingsPage(),
           );
         default:
           return MaterialPageRoute(

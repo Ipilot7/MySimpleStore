@@ -30,11 +30,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
               children: [
                 CircleAvatar(
                   radius: 50.r,
-                  backgroundImage: AssetImage('assets/images/defAvatar.jpg'),
+                  backgroundImage: const AssetImage('assets/images/defAvatar.jpg'),
                 ),
                 SizedBox(height: 10.h),
                 Text(
-                  'Baxtiyor',
+                  'Akramjon',
                   style:
                       AppTextStyles.body20w5.copyWith(color: AppColors.white),
                 ),
@@ -58,7 +58,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 onTap: () {
                   callShowDialog(context);
                 },
-                child: DraverButton(
+                child: const DraverButton(
                     icon: Icons.exit_to_app_outlined, text: 'Exit')),
           ],
         ),
@@ -82,16 +82,16 @@ class _CustomDrawerState extends State<CustomDrawer> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Center(child: Text('О программе')),
+        title: const Center(child: Text('Dastur haqida')),
         actionsAlignment: MainAxisAlignment.spaceAround,
-        content: Text(
-          'Введение удобного учёта ваших доходов и расходов',
+        content: const Text(
+          'Sizning daromad va harajatlaringizni monitoring qilish',
           textAlign: TextAlign.center,
         ),
         actions: [
           Column(
             children: [
-              Text('v 1.0'),
+              const Text('v 1.0'),
               TextButton(
                   style: TextButton.styleFrom(
                       foregroundColor: Colors.white,
@@ -100,7 +100,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text('Ок')),
+                  child: const Text('Ok')),
             ],
           ),
         ],
@@ -112,7 +112,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Выйти из программы'),
+        title: const Text('Выйти из программы'),
         actionsAlignment: MainAxisAlignment.spaceAround,
         actions: [
           TextButton(

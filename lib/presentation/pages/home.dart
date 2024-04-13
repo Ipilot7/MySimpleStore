@@ -69,13 +69,13 @@ class _HomePageState extends State<HomePage>
           IconButton(
               onPressed: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => HistoryPage()));
+                    context, MaterialPageRoute(builder: (_) => const HistoryPage()));
               },
-              icon: Icon(Icons.history))
+              icon: const Icon(Icons.history))
         ],
       ),
       body: ListView(
-        children: [
+        children: const [
           TableWidget(),
         ],
       ),

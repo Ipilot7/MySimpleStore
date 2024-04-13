@@ -33,7 +33,7 @@ class TableWidget extends StatelessWidget {
           Align(
             alignment: Alignment.bottomLeft,
             child: Container(
-              margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+              margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
               padding: EdgeInsets.all(20.r),
               width: double.infinity,
               height: 230.h,
@@ -48,7 +48,7 @@ class TableWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Мой баланс',
+                        'Mening balansim',
                         style: AppTextStyles.body18w3
                             .copyWith(color: AppColors.white),
                       ),
@@ -67,7 +67,7 @@ class TableWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Доходы',
+                            'Daromad',
                             style: AppTextStyles.body18w3
                                 .copyWith(color: AppColors.white),
                           ),
@@ -83,7 +83,7 @@ class TableWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Расходы',
+                            'Harajat',
                             style: AppTextStyles.body18w3
                                 .copyWith(color: AppColors.white),
                           ),

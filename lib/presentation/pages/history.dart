@@ -55,7 +55,7 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("История"),
+        title: const Text("Hikoya"),
       ),
       body: ListView.builder(
         shrinkWrap: true,

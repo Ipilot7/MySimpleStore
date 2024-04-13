@@ -31,10 +31,10 @@ class _ViewPageState extends State<ViewPage> {
       duration: const Duration(milliseconds: 500),
       menuBackgroundColor: Colors.teal,
       mainScreen: PageView(
-          physics: NeverScrollableScrollPhysics(),
-          onPageChanged: (num) {
+          physics: const NeverScrollableScrollPhysics(),
+          onPageChanged: (number) {
             setState(() {
-              selectedIndex = num;
+              selectedIndex = number;
             });
           },
           controller: controller,

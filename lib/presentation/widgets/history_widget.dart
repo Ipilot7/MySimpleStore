@@ -20,7 +20,7 @@ class HistoryWidget extends StatefulWidget {
 }
 
 class _HistoryWidgetState extends State<HistoryWidget> {
-  final IncomeService? _incomeService = IncomeService();
+  final IncomeService _incomeService = IncomeService();
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +48,12 @@ class _HistoryWidgetState extends State<HistoryWidget> {
               ),
               sum > 0
                   ? Text(
-                      '+${sum} UZS',
-                      style: AppTextStyles.body18w4
-                          .copyWith(color: AppColors.lastAction),
+                      '+$sum UZS',
+                      style: AppTextStyles.body18w4.copyWith(color: AppColors.lastAction),
                     )
                   : Text(
-                      '${sum} UZS',
-                      style: AppTextStyles.body18w4
-                          .copyWith(color: AppColors.lastAction),
+                      '$sum UZS',
+                      style: AppTextStyles.body18w4.copyWith(color: AppColors.lastAction),
                     )
             ],
           ),
@@ -63,24 +61,21 @@ class _HistoryWidgetState extends State<HistoryWidget> {
         Container(
           margin: const EdgeInsets.all(10),
           padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: Colors.white),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.white),
           child: Column(
             children: List.generate(
               widget.sortedDataList.length,
               (index) => Slidable(
                 key: ValueKey(widget.sortedDataList[index]),
                 endActionPane: ActionPane(
-                  motion: ScrollMotion(),
+                  motion: const ScrollMotion(),
                   children: [
                     SlidableAction(
                       // An action can be bigger than the others.
                       flex: 2,
                       onPressed: (BuildContext context) {
-                        Navigator.pushNamed(context, Routes.editData,
-                            arguments: {
-                              'user': widget.sortedDataList[index]
-                            }).then((data) {
+                        Navigator.pushNamed(context, Routes.editData, arguments: {'user': widget.sortedDataList[index]})
+                            .then((data) {
                           if (data != null) {
                             setState(() {});
                             _showSuccessSnackBar('User Detail Updated Success');
@@ -88,23 +83,22 @@ class _HistoryWidgetState extends State<HistoryWidget> {
                         });
                         ;
                       },
-                      backgroundColor: Color(0xFF7BC043),
+                      backgroundColor: const Color(0xFF7BC043),
                       foregroundColor: Colors.white,
                       icon: Icons.edit,
-                      label: 'Изменить',
+                      label: "O'zgartirish",
                     ),
                     SlidableAction(
                       onPressed: (BuildContext context) {
-                        _incomeService!
-                            .deleteData(widget.sortedDataList[index].id);
+                        _incomeService!.deleteData(widget.sortedDataList[index].id);
                         setState(() {
                           widget.sortedDataList.removeAt(index);
                         });
                       },
-                      backgroundColor: Color(0xFFFE4A49),
+                      backgroundColor: const Color(0xFFFE4A49),
                       foregroundColor: Colors.white,
                       icon: Icons.delete,
-                      label: 'Удалить',
+                      label: "O'chirish",
                     ),
                   ],
                 ),
@@ -128,9 +122,7 @@ class _HistoryWidgetState extends State<HistoryWidget> {
   }
 
   String truncateWithEllipsis(int cutoff, String myString) {
-    return (myString.length <= cutoff)
-        ? myString
-        : '${myString.substring(0, cutoff)}...';
+    return (myString.length <= cutoff) ? myString : '${myString.substring(0, cutoff)}...';
   }
 
   _showSuccessSnackBar(String message) {

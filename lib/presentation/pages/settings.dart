@@ -25,7 +25,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ZoomDrawer.of(context)!.toggle();
           },
         ),
-        title: const Text('Настройка'),
+        title: const Text('Sozlamalar'),
       ),
       body: ListView(
         children: [
@@ -43,20 +43,20 @@ class _SettingsPageState extends State<SettingsPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Baxtiyor', style: AppTextStyles.body20w5),
+                      Text('Akramjon', style: AppTextStyles.body20w5),
                       SizedBox(height: 20.h),
-                      Text('Botiraliyev', style: AppTextStyles.body20w5),
+                      Text('Usmonov', style: AppTextStyles.body20w5),
                     ],
                   ),
                 ],
               ),
             ]),
           ),
-          const CustomCard(child: Text('Премиум - версия')),
-          const CustomCard(child: Text('Долги')),
-          const CustomCard(child: Text('Категории')),
-          const CustomCard(child: Text('Экспорт')),
-          const CustomCard(child: Text('Основная валюта')),
+          const CustomCard(child: Text('Premium - versiya')),
+          const CustomCard(child: Text('Qarzlar')),
+          const CustomCard(child: Text('Kategoriya')),
+          const CustomCard(child: Text('Eksport')),
+          const CustomCard(child: Text('Asosiy valyuta')),
         ],
       ),
     );
